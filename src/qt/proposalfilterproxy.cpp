@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2013 The Bitcoin Core developers
+// Copyright (c) 2011-2013 The Bogcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -37,7 +37,7 @@ bool ProposalFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex &sou
     int absoluteYesVotes = index.data(ProposalTableModel::AbsoluteYesVotesRole).toInt();
     int percentage = index.data(ProposalTableModel::PercentageRole).toInt();
 
-    CAmount nAmount = amount / BitcoinUnits::factor(BitcoinUnits::BITG);
+    CAmount nAmount = amount / BogcoinUnits::factor(BogcoinUnits::BOG);
     if(proposalStartBlock < startBlock)
        return false;
     if(proposalEndBlock < endBlock)

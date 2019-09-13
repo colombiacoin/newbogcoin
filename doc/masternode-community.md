@@ -1,10 +1,10 @@
 Masternode Community Vote API
 =============================
 
-BitGreen now supports full decentralized community vote system.
+BogCoin now supports full decentralized community vote system.
 
 Community Votes go through a series of stages:
-* prepare - create a special transaction that destroys coins in order to make a voting proposal (currently 25 BITG)
+* prepare - create a special transaction that destroys coins in order to make a voting proposal (currently 25 BOG)
 * submit - propagate transaction to peers on network
 * voting - lobby for votes on your proposal
 

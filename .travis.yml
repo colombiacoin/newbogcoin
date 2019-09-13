@@ -24,7 +24,7 @@ env:
     - CCACHE_COMPRESS=1
     - CCACHE_DIR=$HOME/.ccache
     - BASE_OUTDIR=$TRAVIS_BUILD_DIR/out
-    - SDK_URL=https://bitcoincore.org/depends-sources/sdks
+    - SDK_URL=https://bogcoincore.org/depends-sources/sdks
     - WINEDEBUG=fixme-all
     - DOCKER_PACKAGES="build-essential libtool autotools-dev automake pkg-config bsdmainutils curl git ca-certificates ccache"
 
@@ -66,7 +66,7 @@ jobs:
         GOAL="install"
         # -Wno-psabi is to disable ABI warnings: "note: parameter passing for argument of type ... changed in GCC 7.1"
         # This could be removed once the ABI change warning does not show up by default
-        BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports CXXFLAGS=-Wno-psabi"
+        BOGCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports CXXFLAGS=-Wno-psabi"
 # AArch64
     - stage: test
       env: >-
@@ -76,7 +76,7 @@ jobs:
         RUN_UNIT_TESTS=false
         RUN_FUNCTIONAL_TESTS=false
         GOAL="install"
-        BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports"
+        BOGCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports"
 # Win32
     - stage: test
       env: >-
@@ -85,7 +85,7 @@ jobs:
         DEP_OPTS="NO_QT=1"
         PACKAGES="python3 nsis g++-mingw-w64-i686 wine-binfmt wine32"
         GOAL="install"
-        BITCOIN_CONFIG="--enable-reduce-exports"
+        BOGCOIN_CONFIG="--enable-reduce-exports"
 # Win64
     - stage: test
       env: >-
@@ -93,7 +93,7 @@ jobs:
         DEP_OPTS="NO_QT=1"
         PACKAGES="python3 nsis g++-mingw-w64-x86-64 wine-binfmt wine64"
         GOAL="install"
-        BITCOIN_CONFIG="--enable-reduce-exports"
+        BOGCOIN_CONFIG="--enable-reduce-exports"
 # 32-bit + dash
     - stage: test
       env: >-
@@ -101,7 +101,7 @@ jobs:
         PACKAGES="g++-multilib python3-zmq"
         DEP_OPTS="NO_QT=1"
         GOAL="install"
-        BITCOIN_CONFIG="--enable-zmq --enable-glibc-back-compat --enable-reduce-exports LDFLAGS=-static-libstdc++"
+        BOGCOIN_CONFIG="--enable-zmq --enable-glibc-back-compat --enable-reduce-exports LDFLAGS=-static-libstdc++"
         CONFIG_SHELL="/bin/dash"
 # x86_64 Linux (uses qt5 dev package instead of depends Qt to speed up build and avoid timeout)
     - stage: test
@@ -110,7 +110,7 @@ jobs:
         PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools protobuf-compiler libdbus-1-dev libharfbuzz-dev libprotobuf-dev"
         DEP_OPTS="NO_QT=1 NO_UPNP=1 DEBUG=1 ALLOW_HOST_PACKAGES=1"
         GOAL="install"
-        BITCOIN_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports CPPFLAGS=-DDEBUG_LOCKORDER"
+        BOGCOIN_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports CPPFLAGS=-DDEBUG_LOCKORDER"
 # x86_64 Linux (no depends, only system libs)
     - stage: test
       env: >-
@@ -118,7 +118,7 @@ jobs:
         PACKAGES="python3-zmq qtbase5-dev qttools5-dev-tools libssl1.0-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev libdb5.3++-dev libminiupnpc-dev libzmq3-dev libprotobuf-dev protobuf-compiler libqrencode-dev"
         NO_DEPENDS=1
         GOAL="install"
-        BITCOIN_CONFIG="--enable-zmq --with-incompatible-bdb --enable-glibc-back-compat --enable-reduce-exports --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
+        BOGCOIN_CONFIG="--enable-zmq --with-incompatible-bdb --enable-glibc-back-compat --enable-reduce-exports --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
 # x86_64 Linux (sanitizers)
 #    - stage: test
 #      env: >-
@@ -128,7 +128,7 @@ jobs:
 #        RUN_BENCH=true
 #        RUN_FUNCTIONAL_TESTS=false # Disabled for now, can be combined with the other x86_64 linux NO_DEPENDS job when functional tests pass the sanitizers
 #        GOAL="install"
-#        BITCOIN_CONFIG="--enable-zmq --with-incompatible-bdb --enable-glibc-back-compat --enable-reduce-exports --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER --with-sanitizers=undefined CC=clang CXX=clang++"
+#        BOGCOIN_CONFIG="--enable-zmq --with-incompatible-bdb --enable-glibc-back-compat --enable-reduce-exports --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER --with-sanitizers=undefined CC=clang CXX=clang++"
 # x86_64 Linux, No wallet
 #    - stage: test
 #      env: >-
@@ -136,7 +136,7 @@ jobs:
 #        PACKAGES="python3"
 #        DEP_OPTS="NO_WALLET=1"
 #        GOAL="install"
-#        BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports"
+#        BOGCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports"
 # Cross-Mac
     - stage: test
       env: >-
@@ -146,4 +146,4 @@ jobs:
         RUN_UNIT_TESTS=false
         RUN_FUNCTIONAL_TESTS=false
         GOAL="all deploy"
-        BITCOIN_CONFIG="--enable-gui --enable-reduce-exports --enable-werror"
+        BOGCOIN_CONFIG="--enable-gui --enable-reduce-exports --enable-werror"

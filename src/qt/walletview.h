@@ -1,11 +1,11 @@
-// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2011-2014 The Bogcoin developers
 // Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_WALLETVIEW_H
-#define BITCOIN_QT_WALLETVIEW_H
+#ifndef BOGCOIN_QT_WALLETVIEW_H
+#define BOGCOIN_QT_WALLETVIEW_H
 
 #include "amount.h"
 #include "askpassphrasedialog.h"
@@ -15,7 +15,7 @@
 #include <QStackedWidget>
 #include <ui_interface.h>
 
-class BitcoinGUI;
+class BogcoinGUI;
 class ClientModel;
 class OverviewPage;
 class ReceiveCoinsDialog;
@@ -45,13 +45,13 @@ public:
     explicit WalletView(QWidget* parent);
     ~WalletView();
 
-    void setBitcoinGUI(BitcoinGUI* gui);
+    void setBogcoinGUI(BogcoinGUI* gui);
     /** Set the client model.
         The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic.
     */
     void setClientModel(ClientModel* clientModel);
     /** Set the wallet model.
-        The wallet model represents a bitcoin wallet, and offers access to the list of transactions, address book and sending
+        The wallet model represents a bogcoin wallet, and offers access to the list of transactions, address book and sending
         functionality.
     */
     void setWalletModel(WalletModel* walletModel);
@@ -133,7 +133,7 @@ public slots:
     /** Show progress dialog e.g. for rescan */
     void showProgress(const QString& title, int nProgress);
 
-    /** Update selected BITG amount from transactionview */
+    /** Update selected BOG amount from transactionview */
     void trxAmount(QString amount);
 
 signals:
@@ -147,4 +147,4 @@ signals:
     void incomingTransaction(const QString& date, int unit, const CAmount& amount, const QString& type, const QString& address);
 };
 
-#endif // BITCOIN_QT_WALLETVIEW_H
+#endif // BOGCOIN_QT_WALLETVIEW_H

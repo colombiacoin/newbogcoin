@@ -1,10 +1,10 @@
 // Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "blockexplorer.h"
-#include "bitcoinunits.h"
+#include "bogcoinunits.h"
 #include "chainparams.h"
 #include "clientmodel.h"
 #include "core_io.h"
@@ -49,7 +49,7 @@ static std::string ValueToString(CAmount nValue, bool AllowNegative = false)
     if (nValue < 0 && !AllowNegative)
         return "<span>" + _("unknown") + "</span>";
 
-    QString Str = BitcoinUnits::formatWithUnit(BitcoinUnits::BITG, nValue);
+    QString Str = BogcoinUnits::formatWithUnit(BogcoinUnits::BOG, nValue);
     if (AllowNegative && nValue > 0)
         Str = '+' + Str;
     return std::string("<span>") + Str.toUtf8().data() + "</span>";
@@ -61,7 +61,7 @@ static std::string ScriptToString(const CScript& Script, bool Long = false, bool
         return "unknown";
 
     CTxDestination Dest;
-    CBitcoinAddress Address;
+    CBogcoinAddress Address;
     if (ExtractDestination(Script, Dest) && Address.Set(Dest)) {
         if (Highlight)
             return "<span class=\"addr\">" + Address.ToString() + "</span>";
@@ -378,7 +378,7 @@ std::string TxToString(uint256 BlockHash, const CTransaction& tx)
     return Content;
 }
 
-std::string AddressToString(const CBitcoinAddress& Address)
+std::string AddressToString(const CBogcoinAddress& Address)
 {
     std::string TxLabels[] =
         {
@@ -478,8 +478,8 @@ void BlockExplorer::showEvent(QShowEvent*)
         updateNavButtons();
 
         if (!GetBoolArg("-txindex", false)) {
-            QString Warning = tr("Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (bitgreen.conf).");
-            QMessageBox::warning(this, "BitGreen Core Blockchain Explorer", Warning, QMessageBox::Ok);
+            QString Warning = tr("Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (bogcoin.conf).");
+            QMessageBox::warning(this, "BogCoin Core Blockchain Explorer", Warning, QMessageBox::Ok);
         }
     }
 }
@@ -518,7 +518,7 @@ bool BlockExplorer::switchTo(const QString& query)
     }
 
     // If the query is not an integer, nor a block hash, nor a transaction hash, assume an address
-    CBitcoinAddress Address;
+    CBogcoinAddress Address;
     Address.SetString(query.toUtf8().constData());
     if (Address.IsValid()) {
         std::string Content = AddressToString(Address);

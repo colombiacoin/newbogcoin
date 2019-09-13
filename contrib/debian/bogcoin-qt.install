@@ -1,0 +1,6 @@
+usr/local/bin/bogcoin-qt usr/bin
+share/pixmaps/bogcoin32.xpm usr/share/pixmaps
+share/pixmaps/bogcoin16.xpm usr/share/pixmaps
+share/pixmaps/bogcoin128.png usr/share/pixmaps
+debian/bogcoin-qt.desktop usr/share/applications
+debian/bogcoin-qt.protocol usr/share/kde4/services/

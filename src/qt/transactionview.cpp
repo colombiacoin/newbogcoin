@@ -1,13 +1,13 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
+// Copyright (c) 2011-2013 The Bogcoin developers
 // Copyright (c) 2017 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "transactionview.h"
 
 #include "addresstablemodel.h"
-#include "bitcoinunits.h"
+#include "bogcoinunits.h"
 #include "csvmodelwriter.h"
 #include "editaddressdialog.h"
 #include "guiutil.h"
@@ -321,11 +321,11 @@ void TransactionView::changedAmount(const QString& amount)
     CAmount amount_parsed = 0;
 
     if (model) {
-        // Replace "," by "." so BitcoinUnits::parse will not fail for users entering "," as decimal separator
+        // Replace "," by "." so BogcoinUnits::parse will not fail for users entering "," as decimal separator
         QString newAmount = amount;
         newAmount.replace(QString(","), QString("."));
 
-        if (BitcoinUnits::parse(model->getOptionsModel()->getDisplayUnit(), newAmount, &amount_parsed)) {
+        if (BogcoinUnits::parse(model->getOptionsModel()->getDisplayUnit(), newAmount, &amount_parsed)) {
             transactionProxyModel->setMinAmount(amount_parsed);
         } else {
             transactionProxyModel->setMinAmount(0);
@@ -356,7 +356,7 @@ void TransactionView::exportClicked()
         writer.addColumn(tr("Type"), TransactionTableModel::Type, Qt::EditRole);
         writer.addColumn(tr("Label"), 0, TransactionTableModel::LabelRole);
         writer.addColumn(tr("Address"), 0, TransactionTableModel::AddressRole);
-        writer.addColumn(BitcoinUnits::getAmountColumnTitle(model->getOptionsModel()->getDisplayUnit()), 0, TransactionTableModel::FormattedAmountRole);
+        writer.addColumn(BogcoinUnits::getAmountColumnTitle(model->getOptionsModel()->getDisplayUnit()), 0, TransactionTableModel::FormattedAmountRole);
         writer.addColumn(tr("ID"), 0, TransactionTableModel::TxIDRole);
 
         fExport = writer.write();
@@ -462,7 +462,7 @@ void TransactionView::computeSum()
     foreach (QModelIndex index, selection) {
         amount += index.data(TransactionTableModel::AmountRole).toLongLong();
     }
-    QString strAmount(BitcoinUnits::formatWithUnit(nDisplayUnit, amount, true, BitcoinUnits::separatorNever));
+    QString strAmount(BogcoinUnits::formatWithUnit(nDisplayUnit, amount, true, BogcoinUnits::separatorNever));
     if (amount < 0) strAmount = "<span style='color:red;'>" + strAmount + "</span>";
     emit trxAmount(strAmount);
 }

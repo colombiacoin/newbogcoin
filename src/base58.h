@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bogcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,8 +11,8 @@
  * - E-mail usually won't line-break if there's no punctuation to break at.
  * - Double-clicking selects the whole number as one word if it's all alphanumeric.
  */
-#ifndef BITCOIN_BASE58_H
-#define BITCOIN_BASE58_H
+#ifndef BOGCOIN_BASE58_H
+#define BOGCOIN_BASE58_H
 
 #include "chainparams.h"
 #include "key.h"
@@ -100,13 +100,13 @@ public:
     bool operator>(const CBase58Data& b58) const { return CompareTo(b58) > 0; }
 };
 
-/** base58-encoded BitGreen addresses.
+/** base58-encoded BogCoin addresses.
  * Public-key-hash-addresses have version 0 (or 111 testnet).
  * The data vector contains RIPEMD160(SHA256(pubkey)), where pubkey is the serialized public key.
  * Script-hash-addresses have version 5 (or 196 testnet).
  * The data vector contains RIPEMD160(SHA256(cscript)), where cscript is the serialized redemption script.
  */
-class CBitcoinAddress : public CBase58Data
+class CBogcoinAddress : public CBase58Data
 {
 public:
     bool Set(const CKeyID& id);
@@ -115,10 +115,10 @@ public:
     bool IsValid() const;
     bool IsValid(const CChainParams& params) const;
 
-    CBitcoinAddress() {}
-    CBitcoinAddress(const CTxDestination& dest) { Set(dest); }
-    CBitcoinAddress(const std::string& strAddress) { SetString(strAddress); }
-    CBitcoinAddress(const char* pszAddress) { SetString(pszAddress); }
+    CBogcoinAddress() {}
+    CBogcoinAddress(const CTxDestination& dest) { Set(dest); }
+    CBogcoinAddress(const std::string& strAddress) { SetString(strAddress); }
+    CBogcoinAddress(const char* pszAddress) { SetString(pszAddress); }
 
     CTxDestination Get() const;
     bool GetKeyID(CKeyID& keyID) const;
@@ -128,7 +128,7 @@ public:
 /**
  * A base58-encoded secret key
  */
-class CBitcoinSecret : public CBase58Data
+class CBogcoinSecret : public CBase58Data
 {
 public:
     void SetKey(const CKey& vchSecret);
@@ -137,12 +137,12 @@ public:
     bool SetString(const char* pszSecret);
     bool SetString(const std::string& strSecret);
 
-    CBitcoinSecret(const CKey& vchSecret) { SetKey(vchSecret); }
-    CBitcoinSecret() {}
+    CBogcoinSecret(const CKey& vchSecret) { SetKey(vchSecret); }
+    CBogcoinSecret() {}
 };
 
 template <typename K, int Size, CChainParams::Base58Type Type>
-class CBitcoinExtKeyBase : public CBase58Data
+class CBogcoinExtKeyBase : public CBase58Data
 {
 public:
     void SetKey(const K& key)
@@ -159,15 +159,15 @@ public:
         return ret;
     }
 
-    CBitcoinExtKeyBase(const K& key)
+    CBogcoinExtKeyBase(const K& key)
     {
         SetKey(key);
     }
 
-    CBitcoinExtKeyBase() {}
+    CBogcoinExtKeyBase() {}
 };
 
-typedef CBitcoinExtKeyBase<CExtKey, 74, CChainParams::EXT_SECRET_KEY> CBitcoinExtKey;
-typedef CBitcoinExtKeyBase<CExtPubKey, 74, CChainParams::EXT_PUBLIC_KEY> CBitcoinExtPubKey;
+typedef CBogcoinExtKeyBase<CExtKey, 74, CChainParams::EXT_SECRET_KEY> CBogcoinExtKey;
+typedef CBogcoinExtKeyBase<CExtPubKey, 74, CChainParams::EXT_PUBLIC_KEY> CBogcoinExtPubKey;
 
-#endif // BITCOIN_BASE58_H
+#endif // BOGCOIN_BASE58_H

@@ -1,11 +1,11 @@
-// Copyright (c) 2011-2015 The Bitcoin Core developers
+// Copyright (c) 2011-2015 The Bogcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_PROPOSALTABLEMODEL_H
-#define BITCOIN_QT_PROPOSALTABLEMODEL_H
+#ifndef BOGCOIN_QT_PROPOSALTABLEMODEL_H
+#define BOGCOIN_QT_PROPOSALTABLEMODEL_H
 
-#include "bitcoinunits.h"
+#include "bogcoinunits.h"
 
 #include <QAbstractTableModel>
 #include <QStringList>
@@ -68,4 +68,4 @@ private:
     QStringList columns;
 };
 
-#endif // BITCOIN_QT_PROPOSALTABLEMODEL_H
+#endif // BOGCOIN_QT_PROPOSALTABLEMODEL_H

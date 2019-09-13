@@ -1,12 +1,12 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
+// Copyright (c) 2011-2013 The Bogcoin developers
 // Copyright (c) 2016-2018 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "walletframe.h"
 
-#include "bitcoingui.h"
+#include "bogcoingui.h"
 #include "walletview.h"
 
 #include <cstdio>
@@ -14,7 +14,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
-WalletFrame::WalletFrame(BitcoinGUI* _gui) : QFrame(_gui),
+WalletFrame::WalletFrame(BogcoinGUI* _gui) : QFrame(_gui),
                                              gui(_gui)
 {
     // Leave HBox hook for adding a list view later
@@ -44,7 +44,7 @@ bool WalletFrame::addWallet(const QString& name, WalletModel* walletModel)
         return false;
 
     WalletView* walletView = new WalletView(this);
-    walletView->setBitcoinGUI(gui);
+    walletView->setBogcoinGUI(gui);
     walletView->setClientModel(clientModel);
     walletView->setWalletModel(walletModel);
     walletView->showOutOfSyncWarning(bOutOfSync);

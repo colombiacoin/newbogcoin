@@ -1,4 +1,4 @@
-# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Copyright (c) 2013-2016 The Bogcoin Core developers
 # Copyright (c) 2017-2019 The Bicoin Green Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -20,27 +20,27 @@ else
 LIBUNIVALUE = $(UNIVALUE_LIBS)
 endif
 
-BITCOIN_INCLUDES=-I$(builddir) $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
+BOGCOIN_INCLUDES=-I$(builddir) $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
 
-BITCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
-BITCOIN_INCLUDES += $(UNIVALUE_CFLAGS)
+BOGCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
+BOGCOIN_INCLUDES += $(UNIVALUE_CFLAGS)
 
-LIBBITCOIN_SERVER=libbitcoin_server.a
-LIBBITCOIN_COMMON=libbitcoin_common.a
-LIBBITCOIN_CLI=libbitcoin_cli.a
-LIBBITCOIN_UTIL=libbitcoin_util.a
-LIBBITCOIN_CRYPTO=crypto/libbitcoin_crypto.a
-LIBBITCOINQT=qt/libbitcoinqt.a
+LIBBOGCOIN_SERVER=libbogcoin_server.a
+LIBBOGCOIN_COMMON=libbogcoin_common.a
+LIBBOGCOIN_CLI=libbogcoin_cli.a
+LIBBOGCOIN_UTIL=libbogcoin_util.a
+LIBBOGCOIN_CRYPTO=crypto/libbogcoin_crypto.a
+LIBBOGCOINQT=qt/libbogcoinqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 
 if ENABLE_ZMQ
-LIBBITCOIN_ZMQ=libbitcoin_zmq.a
+LIBBOGCOIN_ZMQ=libbogcoin_zmq.a
 endif
-if BUILD_BITCOIN_LIBS
-LIBBITCOINCONSENSUS=libbitcoinconsensus.la
+if BUILD_BOGCOIN_LIBS
+LIBBOGCOINCONSENSUS=libbogcoinconsensus.la
 endif
 if ENABLE_WALLET
-LIBBITCOIN_WALLET=libbitcoin_wallet.a
+LIBBOGCOIN_WALLET=libbogcoin_wallet.a
 endif
 
 $(LIBSECP256K1): $(wildcard secp256k1/src/*.h) $(wildcard secp256k1/src/*.c) $(wildcard secp256k1/include/*)
@@ -49,32 +49,32 @@ $(LIBSECP256K1): $(wildcard secp256k1/src/*.h) $(wildcard secp256k1/src/*.c) $(w
 # Make is not made aware of per-object dependencies to avoid limiting building parallelization
 # But to build the less dependent modules first, we manually select their order here:
 EXTRA_LIBRARIES += \
-  $(LIBBITCOIN_CRYPTO) \
-  $(LIBBITCOIN_UTIL) \
-  $(LIBBITCOIN_COMMON) \
-  $(LIBBITCOIN_SERVER) \
-  $(LIBBITCOIN_CLI) \
-  $(LIBBITCOIN_WALLET) \
-  $(LIBBITCOIN_ZMQ)
+  $(LIBBOGCOIN_CRYPTO) \
+  $(LIBBOGCOIN_UTIL) \
+  $(LIBBOGCOIN_COMMON) \
+  $(LIBBOGCOIN_SERVER) \
+  $(LIBBOGCOIN_CLI) \
+  $(LIBBOGCOIN_WALLET) \
+  $(LIBBOGCOIN_ZMQ)
 
-lib_LTLIBRARIES = $(LIBBITCOINCONSENSUS)
+lib_LTLIBRARIES = $(LIBBOGCOINCONSENSUS)
 
 bin_PROGRAMS =
 noinst_PROGRAMS =
 TESTS =
 BENCHMARKS =
 
-if BUILD_BITCOIND
-  bin_PROGRAMS += bitgreend
+if BUILD_BOGCOIND
+  bin_PROGRAMS += bogcoind
 endif
 
-if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += bitgreen-cli bitgreen-tx
+if BUILD_BOGCOIN_UTILS
+  bin_PROGRAMS += bogcoin-cli bogcoin-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
-# bitgreen core #
-BITCOIN_CORE_H = \
+# bogcoin core #
+BOGCOIN_CORE_H = \
   activemasternode.h \
   addrman.h \
   alert.h \
@@ -177,12 +177,12 @@ obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
 	@$(top_srcdir)/share/genbuild.sh "$(abs_top_builddir)/src/obj/build.h" \
 	  "$(abs_top_srcdir)"
-libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
+libbogcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between bitgreend and bitgreen-qt
-libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libbitcoin_server_a_SOURCES = \
+# server: shared between bogcoind and bogcoin-qt
+libbogcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BOGCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
+libbogcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbogcoin_server_a_SOURCES = \
   addrman.cpp \
   alert.cpp \
   bloom.cpp \
@@ -215,22 +215,22 @@ libbitcoin_server_a_SOURCES = \
   txdb.cpp \
   txmempool.cpp \
   validationinterface.cpp \
-  $(BITCOIN_CORE_H)
+  $(BOGCOIN_CORE_H)
 
 if ENABLE_ZMQ
-libbitcoin_zmq_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
-libbitcoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libbitcoin_zmq_a_SOURCES = \
+libbogcoin_zmq_a_CPPFLAGS = $(BOGCOIN_INCLUDES) $(ZMQ_CFLAGS)
+libbogcoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbogcoin_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
   zmq/zmqpublishnotifier.cpp
 endif
 
-# wallet: shared between bitgreend and bitgreen-qt, but only linked
+# wallet: shared between bogcoind and bogcoin-qt, but only linked
 # when wallet enabled
-libbitcoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libbitcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libbitcoin_wallet_a_SOURCES = \
+libbogcoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BOGCOIN_INCLUDES)
+libbogcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbogcoin_wallet_a_SOURCES = \
   activemasternode.cpp \
   bip38.cpp \
   db.cpp \
@@ -250,12 +250,12 @@ libbitcoin_wallet_a_SOURCES = \
   wallet.cpp \
   wallet_ismine.cpp \
   walletdb.cpp \
-  $(BITCOIN_CORE_H)
+  $(BOGCOIN_CORE_H)
 
 # crypto primitives library
-crypto_libbitcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(PIC_FLAGS)
-crypto_libbitcoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIC_FLAGS)
-crypto_libbitcoin_crypto_a_SOURCES = \
+crypto_libbogcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(PIC_FLAGS)
+crypto_libbogcoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIC_FLAGS)
+crypto_libbogcoin_crypto_a_SOURCES = \
   crypto/sha1.cpp \
   crypto/sha256.cpp \
   crypto/sha512.cpp \
@@ -288,10 +288,10 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sph_skein.h \
   crypto/sph_types.h
 
-# common: shared between bitgreend, and bitgreen-qt and non-server tools
-libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libbitcoin_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libbitcoin_common_a_SOURCES = \
+# common: shared between bogcoind, and bogcoin-qt and non-server tools
+libbogcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BOGCOIN_INCLUDES)
+libbogcoin_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbogcoin_common_a_SOURCES = \
   allocators.cpp \
   amount.cpp \
   base58.cpp \
@@ -318,14 +318,14 @@ libbitcoin_common_a_SOURCES = \
   script/script_error.cpp \
   spork.cpp \
   sporkdb.cpp \
-  $(BITCOIN_CORE_H)
+  $(BOGCOIN_CORE_H)
 
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
 # backward-compatibility objects and their sanity checks are linked.
-libbitcoin_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libbitcoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libbitcoin_util_a_SOURCES = \
+libbogcoin_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(BOGCOIN_INCLUDES)
+libbogcoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbogcoin_util_a_SOURCES = \
   allocators.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
@@ -341,90 +341,90 @@ libbitcoin_util_a_SOURCES = \
   utilmoneystr.cpp \
   utilstrencodings.cpp \
   utiltime.cpp \
-  $(BITCOIN_CORE_H)
+  $(BOGCOIN_CORE_H)
 
 if GLIBC_BACK_COMPAT
-libbitcoin_util_a_SOURCES += compat/glibc_compat.cpp
+libbogcoin_util_a_SOURCES += compat/glibc_compat.cpp
 AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
-# cli: shared between bitgreen-cli and bitgreen-qt
-libbitcoin_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libbitcoin_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libbitcoin_cli_a_SOURCES = \
+# cli: shared between bogcoin-cli and bogcoin-qt
+libbogcoin_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(BOGCOIN_INCLUDES)
+libbogcoin_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbogcoin_cli_a_SOURCES = \
   rpcclient.cpp \
-  $(BITCOIN_CORE_H)
+  $(BOGCOIN_CORE_H)
 
-nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
+nodist_libbogcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# bitgreend binary #
-bitgreend_SOURCES = bitgreend.cpp
-bitgreend_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-bitgreend_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-bitgreend_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# bogcoind binary #
+bogcoind_SOURCES = bogcoind.cpp
+bogcoind_CPPFLAGS = $(AM_CPPFLAGS) $(BOGCOIN_INCLUDES)
+bogcoind_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+bogcoind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-bitgreend_SOURCES += bitgreend-res.rc
+bogcoind_SOURCES += bogcoind-res.rc
 endif
-bitgreend_LDADD = \
-  $(LIBBITCOIN_SERVER) \
-  $(LIBBITCOIN_WALLET) \
-  $(LIBBITCOIN_COMMON) \
+bogcoind_LDADD = \
+  $(LIBBOGCOIN_SERVER) \
+  $(LIBBOGCOIN_WALLET) \
+  $(LIBBOGCOIN_COMMON) \
   $(LIBUNIVALUE) \
-  $(LIBBITCOIN_UTIL) \
-  $(LIBBITCOIN_ZMQ) \
-  $(LIBBITCOIN_CRYPTO) \
+  $(LIBBOGCOIN_UTIL) \
+  $(LIBBOGCOIN_ZMQ) \
+  $(LIBBOGCOIN_CRYPTO) \
   $(LIBLEVELDB) \
   $(LIBLEVELDB_SSE42) \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-bitgreend_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+bogcoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
-# bitgreen-cli binary #
-bitgreen_cli_SOURCES = bitgreen-cli.cpp
-bitgreen_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-bitgreen_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-bitgreen_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# bogcoin-cli binary #
+bogcoin_cli_SOURCES = bogcoin-cli.cpp
+bogcoin_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BOGCOIN_INCLUDES) $(EVENT_CFLAGS)
+bogcoin_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+bogcoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-bitgreend_SOURCES += bitgreend-res.rc
+bogcoind_SOURCES += bogcoind-res.rc
 endif
 
-bitgreen_cli_LDADD = \
-  $(LIBBITCOIN_CLI) \
+bogcoin_cli_LDADD = \
+  $(LIBBOGCOIN_CLI) \
   $(LIBUNIVALUE) \
-  $(LIBBITCOIN_UTIL) \
-  $(LIBBITCOIN_CRYPTO)
+  $(LIBBOGCOIN_UTIL) \
+  $(LIBBOGCOIN_CRYPTO)
 
-bitgreen_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+bogcoin_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
-# bitgreen-tx binary #
-bitgreen_tx_SOURCES = bitgreen-tx.cpp
-bitgreen_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-bitgreen_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-bitgreen_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# bogcoin-tx binary #
+bogcoin_tx_SOURCES = bogcoin-tx.cpp
+bogcoin_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BOGCOIN_INCLUDES)
+bogcoin_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+bogcoin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-bitgreen_tx_SOURCES += bitgreen-tx-res.rc
+bogcoin_tx_SOURCES += bogcoin-tx-res.rc
 endif
 
-bitgreen_tx_LDADD = \
+bogcoin_tx_LDADD = \
   $(LIBUNIVALUE) \
-  $(LIBBITCOIN_COMMON) \
-  $(LIBBITCOIN_UTIL) \
-  $(LIBBITCOIN_CRYPTO) \
+  $(LIBBOGCOIN_COMMON) \
+  $(LIBBOGCOIN_UTIL) \
+  $(LIBBOGCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-bitgreen_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+bogcoin_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
-# bitcoinconsensus library #
-if BUILD_BITCOIN_LIBS
-include_HEADERS = script/bitcoinconsensus.h
-libbitcoinconsensus_la_SOURCES = \
+# bogcoinconsensus library #
+if BUILD_BOGCOIN_LIBS
+include_HEADERS = script/bogcoinconsensus.h
+libbogcoinconsensus_la_SOURCES = \
   allocators.cpp \
   primitives/transaction.cpp \
   crypto/hmac_sha512.cpp \
@@ -437,18 +437,18 @@ libbitcoinconsensus_la_SOURCES = \
   pubkey.cpp \
   script/script.cpp \
   script/interpreter.cpp \
-  script/bitcoinconsensus.cpp \
+  script/bogcoinconsensus.cpp \
   uint256.cpp \
   utilstrencodings.cpp
 
 if GLIBC_BACK_COMPAT
-  libbitcoinconsensus_la_SOURCES += compat/glibc_compat.cpp
+  libbogcoinconsensus_la_SOURCES += compat/glibc_compat.cpp
 endif
 
-libbitcoinconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-libbitcoinconsensus_la_LIBADD = $(LIBSECP256K1)
-libbitcoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_BITCOIN_INTERNAL
-libbitcoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbogcoinconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
+libbogcoinconsensus_la_LIBADD = $(LIBSECP256K1)
+libbogcoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_BOGCOIN_INTERNAL
+libbogcoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif
 #
@@ -467,12 +467,12 @@ CLEANFILES += obj/build.h
 EXTRA_DIST =
 
 
-config/bitgreen-config.h: config/stamp-h1
+config/bogcoin-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-config/stamp-h1: $(top_srcdir)/$(subdir)/config/bitgreen-config.h.in $(top_builddir)/config.status
+config/stamp-h1: $(top_srcdir)/$(subdir)/config/bogcoin-config.h.in $(top_builddir)/config.status
 	$(AM_V_at)$(MAKE) -C $(top_builddir) $(subdir)/$(@)
-$(top_srcdir)/$(subdir)/config/bitgreen-config.h.in:  $(am__configure_deps)
-	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/bitgreen-config.h.in
+$(top_srcdir)/$(subdir)/config/bogcoin-config.h.in:  $(am__configure_deps)
+	$(AM_V_at)$(MAKE) -C $(top_srcdir) $(subdir)/config/bogcoin-config.h.in
 
 clean-local:
 	-$(MAKE) -C secp256k1 clean

@@ -1,9 +1,9 @@
-// Copyright (c) 2012-2014 The Bitcoin developers
+// Copyright (c) 2012-2014 The Bogcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_LIMITEDMAP_H
-#define BITCOIN_LIMITEDMAP_H
+#ifndef BOGCOIN_LIMITEDMAP_H
+#define BOGCOIN_LIMITEDMAP_H
 
 #include <assert.h>
 #include <map>
@@ -91,4 +91,4 @@ public:
     }
 };
 
-#endif // BITCOIN_LIMITEDMAP_H
+#endif // BOGCOIN_LIMITEDMAP_H

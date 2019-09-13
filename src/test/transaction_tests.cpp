@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2014 The Bitcoin Core developers
+// Copyright (c) 2011-2014 The Bogcoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,7 +13,7 @@
 #include "script/script_error.h"
 #include "core_io.h"
 
-#include "test/test_bitgreen.h"
+#include "test/test_bogcoin.h"
 
 #include <map>
 #include <string>

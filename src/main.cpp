@@ -1,8 +1,8 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bogcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -50,7 +50,7 @@ using namespace boost;
 using namespace std;
 
 #if defined(NDEBUG)
-#error "BitGreen cannot be compiled without assertions."
+#error "BogCoin cannot be compiled without assertions."
 #endif
 
 /**
@@ -80,9 +80,9 @@ unsigned int nStakeMinAge = 60 * 60; // 1 hour
 unsigned int nNewStakeMinAge = 60 * 60 * 24; // 24 hours
 int64_t nReserveBalance = 0;
 
-/** Fees smaller than this (in ubitg) are considered zero fee (for relaying and mining)
- * We are ~100 times smaller then bitcoin now (2015-06-23), set minRelayTxFee only 10 times higher
- * so it's still 10 times lower comparing to bitcoin.
+/** Fees smaller than this (in ubog) are considered zero fee (for relaying and mining)
+ * We are ~100 times smaller then bogcoin now (2015-06-23), set minRelayTxFee only 10 times higher
+ * so it's still 10 times lower comparing to bogcoin.
  */
 CFeeRate minRelayTxFee = CFeeRate(10000);
 
@@ -1950,7 +1950,7 @@ static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck()
 {
-    RenameThread("bitgreen-scriptch");
+    RenameThread("bogcoin-scriptch");
     scriptcheckqueue.Thread();
 }
 
@@ -3076,7 +3076,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
                 nHeight = (*mi).second->nHeight + 1;
         }
 
-        // BITG
+        // BOG
         // It is entierly possible that we don't have enough data and this could fail
         // (i.e. the block could indeed be valid). Store the block for later consideration
         // but issue an initial reject message.
@@ -5593,7 +5593,7 @@ bool SendMessages(CNode* pto, bool fSendTrickle)
         bool fFetch = state.fPreferredDownload || (nPreferredDownload == 0 && !pto->fClient && !pto->fOneShot); // Download if this is a nice peer, or we have no nice peers and this one might do.
         if (!state.fSyncStarted && !pto->fClient && fFetch /*&& !fImporting*/ && !fReindex) {
             // Only actively request headers from a single peer, unless we're close to end of initial download.
-            if (nSyncStarted == 0 || pindexBestHeader->GetBlockTime() > GetAdjustedTime() - 6 * 60 * 60) { // NOTE: was "close to today" and 24h in Bitcoin
+            if (nSyncStarted == 0 || pindexBestHeader->GetBlockTime() > GetAdjustedTime() - 6 * 60 * 60) { // NOTE: was "close to today" and 24h in Bogcoin
                 state.fSyncStarted = true;
                 nSyncStarted++;
                 //CBlockIndex *pindexStart = pindexBestHeader->pprev ? pindexBestHeader->pprev : pindexBestHeader;

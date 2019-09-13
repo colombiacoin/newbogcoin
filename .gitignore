@@ -7,12 +7,12 @@ reset-files.bash
 *.tar.gz
 
 *.exe
-src/bitgreen
-src/bitgreend
-src/bitgreen-cli
-src/bitgreen-tx
-src/test/test_bitgreen
-src/qt/test/test_bitgreen-qt
+src/bogcoin
+src/bogcoind
+src/bogcoin-cli
+src/bogcoin-tx
+src/test/test_bogcoin
+src/qt/test/test_bogcoin-qt
 
 # autoreconf
 Makefile.in
@@ -38,8 +38,8 @@ confdefs.h
 conftest.cpp
 conftest.err
 libtool
-src/config/bitgreen-config.h
-src/config/bitgreen-config.h.in
+src/config/bogcoin-config.h
+src/config/bogcoin-config.h.in
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
@@ -64,7 +64,7 @@ src/qt/test/moc*.cpp
 *.pyc
 *.o
 *.o-*
-.bitgreen
+.bogcoin
 *.a
 *.pb.cc
 *.pb.h
@@ -84,12 +84,12 @@ src/qt/test/moc*.cpp
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-bitgreen-qt
-BitGreen-Qt.app
+bogcoin-qt
+BogCoin-Qt.app
 
 # Unit-tests
 Makefile.test
-bitgreen-qt_test
+bogcoin-qt_test
 src/test/buildenv.py
 
 # Resources cpp
@@ -105,7 +105,7 @@ build
 #lcov
 *.gcno
 /*.info
-test_bitgreen.coverage/
+test_bogcoin.coverage/
 total.coverage/
 coverage_percent.txt
 
@@ -115,7 +115,7 @@ linux-build
 win32-build
 test/config.ini
 test/cache/*
-qa/pull-tester/run-bitcoind-for-test.sh
+qa/pull-tester/run-bogcoind-for-test.sh
 qa/pull-tester/tests-config.sh
 qa/pull-tester/cache/*
 qa/pull-tester/test.*/*
@@ -126,7 +126,7 @@ qa/pull-tester/test.*/*
 .project
 /doc/doxygen/
 /nbproject/
-libbitcoinconsensus.pc
+libbogcoinconsensus.pc
 .idea
 CMakeLists.txt
 cmake-build-debug

@@ -1,6 +1,6 @@
 ### TestGen ###
 
-Utilities to generate test vectors for the data-driven BitGreen tests.
+Utilities to generate test vectors for the data-driven BogCoin tests.
 
 Usage:
 

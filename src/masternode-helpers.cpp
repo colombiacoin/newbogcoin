@@ -1,6 +1,6 @@
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,7 +20,7 @@ void ThreadMasternodePool()
     if (fLiteMode) return; //disable all Masternode related functionality
 
     // Make this thread recognisable
-    RenameThread("bitgreen-mnpool");
+    RenameThread("bogcoin-mnpool");
 
     unsigned int c = 0;
 
@@ -66,7 +66,7 @@ bool CMasternodeSigner::IsVinAssociatedWithPubkey(CTxIn& vin, CPubKey& pubkey)
 
 bool CMasternodeSigner::SetKey(std::string strSecret, std::string& errorMessage, CKey& key, CPubKey& pubkey)
 {
-    CBitcoinSecret vchSecret;
+    CBogcoinSecret vchSecret;
     bool fGood = vchSecret.SetString(strSecret);
 
     if (!fGood) {
@@ -82,7 +82,7 @@ bool CMasternodeSigner::SetKey(std::string strSecret, std::string& errorMessage,
 
 bool CMasternodeSigner::GetKeysFromSecret(std::string strSecret, CKey& keyRet, CPubKey& pubkeyRet)
 {
-    CBitcoinSecret vchSecret;
+    CBogcoinSecret vchSecret;
 
     if (!vchSecret.SetString(strSecret)) return false;
 
@@ -126,7 +126,7 @@ bool CMasternodeSigner::VerifyMessage(CPubKey pubkey, vector<unsigned char>& vch
 
 bool CMasternodeSigner::SetCollateralAddress(std::string strAddress)
 {
-    CBitcoinAddress address;
+    CBogcoinAddress address;
     if (!address.SetString(strAddress)) {
         LogPrintf("CMasternodeSigner::SetCollateralAddress - Invalid collateral address\n");
         return false;

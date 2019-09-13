@@ -1,9 +1,9 @@
-// Copyright (c) 2012-2014 The Bitcoin developers
+// Copyright (c) 2012-2014 The Bogcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_BLOOM_H
-#define BITCOIN_BLOOM_H
+#ifndef BOGCOIN_BLOOM_H
+#define BOGCOIN_BLOOM_H
 
 #include "serialize.h"
 
@@ -97,4 +97,4 @@ public:
     void UpdateEmptyFull();
 };
 
-#endif // BITCOIN_BLOOM_H
+#endif // BOGCOIN_BLOOM_H

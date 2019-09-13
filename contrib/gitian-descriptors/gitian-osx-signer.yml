@@ -1,5 +1,5 @@
 ---
-name: "bitgreen-dmg-signer"
+name: "bogcoin-dmg-signer"
 suites:
 - "bionic"
 architectures:
@@ -7,10 +7,10 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/bitgreen-official/bitgreen-detached-sigs.git"
+- "url": "https://github.com/bogcoin-official/bogcoin-detached-sigs.git"
   "dir": "signature"
 files:
-- "bitgreen-osx-unsigned.tar.gz"
+- "bogcoin-osx-unsigned.tar.gz"
 script: |
   WRAP_DIR=$HOME/wrapped
   mkdir -p ${WRAP_DIR}
@@ -27,8 +27,8 @@ script: |
     chmod +x ${WRAP_DIR}/${prog}
   done
 
-  UNSIGNED=bitgreen-osx-unsigned.tar.gz
-  SIGNED=bitgreen-osx-signed.dmg
+  UNSIGNED=bogcoin-osx-unsigned.tar.gz
+  SIGNED=bogcoin-osx-signed.dmg
 
   tar -xf ${UNSIGNED}
   OSX_VOLNAME="$(cat osx_volname)"

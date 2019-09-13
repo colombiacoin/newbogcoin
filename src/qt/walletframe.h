@@ -1,18 +1,18 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
+// Copyright (c) 2011-2013 The Bogcoin developers
 // Copyright (c) 2016-2018 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_WALLETFRAME_H
-#define BITCOIN_QT_WALLETFRAME_H
+#ifndef BOGCOIN_QT_WALLETFRAME_H
+#define BOGCOIN_QT_WALLETFRAME_H
 
 #include "askpassphrasedialog.h"
 
 #include <QFrame>
 #include <QMap>
 
-class BitcoinGUI;
+class BogcoinGUI;
 class ClientModel;
 class SendCoinsRecipient;
 class WalletModel;
@@ -28,7 +28,7 @@ class WalletFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit WalletFrame(BitcoinGUI* _gui = 0);
+    explicit WalletFrame(BogcoinGUI* _gui = 0);
     ~WalletFrame();
 
     void setClientModel(ClientModel* clientModel);
@@ -44,7 +44,7 @@ public:
 
 private:
     QStackedWidget* walletStack;
-    BitcoinGUI* gui;
+    BogcoinGUI* gui;
     ClientModel* clientModel;
     QMap<QString, WalletView*> mapWalletViews;
 
@@ -98,4 +98,4 @@ public slots:
     void usedReceivingAddresses();
 };
 
-#endif // BITCOIN_QT_WALLETFRAME_H
+#endif // BOGCOIN_QT_WALLETFRAME_H

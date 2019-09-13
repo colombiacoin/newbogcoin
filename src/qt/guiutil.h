@@ -1,11 +1,11 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
+// Copyright (c) 2011-2013 The Bogcoin developers
 // Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_GUIUTIL_H
-#define BITCOIN_QT_GUIUTIL_H
+#ifndef BOGCOIN_QT_GUIUTIL_H
+#define BOGCOIN_QT_GUIUTIL_H
 
 #include "amount.h"
 
@@ -32,7 +32,7 @@ class QUrl;
 class QWidget;
 QT_END_NAMESPACE
 
-/** Utility functions used by the BitGreen Qt UI.
+/** Utility functions used by the BogCoin Qt UI.
  */
 namespace GUIUtil
 {
@@ -40,17 +40,17 @@ namespace GUIUtil
 QString dateTimeStr(const QDateTime& datetime);
 QString dateTimeStr(qint64 nTime);
 
-// Render BITG addresses in monospace font
-QFont bitcoinAddressFont();
+// Render BOG addresses in monospace font
+QFont bogcoinAddressFont();
 
 // Set up widgets for address and amounts
 void setupAddressWidget(QValidatedLineEdit* widget, QWidget* parent);
 void setupAmountWidget(QLineEdit* widget, QWidget* parent);
 
-// Parse "bitgreen:" URI into recipient object, return true on successful parsing
-bool parseBitcoinURI(const QUrl& uri, SendCoinsRecipient* out);
-bool parseBitcoinURI(QString uri, SendCoinsRecipient* out);
-QString formatBitcoinURI(const SendCoinsRecipient& info);
+// Parse "bogcoin:" URI into recipient object, return true on successful parsing
+bool parseBogcoinURI(const QUrl& uri, SendCoinsRecipient* out);
+bool parseBogcoinURI(QString uri, SendCoinsRecipient* out);
+QString formatBogcoinURI(const SendCoinsRecipient& info);
 
 // Returns true if given address+amount meets "dust" definition
 bool isDust(const QString& address, const CAmount& amount);
@@ -105,7 +105,7 @@ bool isObscured(QWidget* w);
 // Open debug.log
 void openDebugLogfile();
 
-// Open bitgreen.conf
+// Open bogcoin.conf
 void openConfigfile();
 
 // Open masternode.conf
@@ -231,4 +231,4 @@ QString formatPingTime(double dPingTime);
 
 } // namespace GUIUtil
 
-#endif // BITCOIN_QT_GUIUTIL_H
+#endif // BOGCOIN_QT_GUIUTIL_H

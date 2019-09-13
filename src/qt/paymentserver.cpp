@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2011-2014 The Bogcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
@@ -6,7 +6,7 @@
 
 #include "paymentserver.h"
 
-#include "bitcoinunits.h"
+#include "bogcoinunits.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
 
@@ -46,15 +46,15 @@
 using namespace boost;
 using namespace std;
 
-const int BITCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
-const QString BITCOIN_IPC_PREFIX("bitgreen:");
+const int BOGCOIN_IPC_CONNECT_TIMEOUT = 1000; // milliseconds
+const QString BOGCOIN_IPC_PREFIX("bogcoin:");
 // BIP70 payment protocol messages
 const char* BIP70_MESSAGE_PAYMENTACK = "PaymentACK";
 const char* BIP70_MESSAGE_PAYMENTREQUEST = "PaymentRequest";
 // BIP71 payment protocol media types
-const char* BIP71_MIMETYPE_PAYMENT = "application/bitgreen-payment";
-const char* BIP71_MIMETYPE_PAYMENTACK = "application/bitgreen-paymentack";
-const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/bitgreen-paymentrequest";
+const char* BIP71_MIMETYPE_PAYMENT = "application/bogcoin-payment";
+const char* BIP71_MIMETYPE_PAYMENTACK = "application/bogcoin-paymentack";
+const char* BIP71_MIMETYPE_PAYMENTREQUEST = "application/bogcoin-paymentrequest";
 // BIP70 max payment request size in bytes (DoS protection)
 const qint64 BIP70_MAX_PAYMENTREQUEST_SIZE = 50000;
 
@@ -81,7 +81,7 @@ namespace // Anon namespace
 //
 static QString ipcServerName()
 {
-    QString name("BitGreenQt");
+    QString name("BogCoinQt");
 
     // Append a simple hash of the datadir
     // Note that GetDataDir(true) returns a different path
@@ -188,17 +188,17 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
         if (arg.startsWith("-"))
             continue;
 
-        // If the bitgreen: URI contains a payment request, we are not able to detect the
+        // If the bogcoin: URI contains a payment request, we are not able to detect the
         // network as that would require fetching and parsing the payment request.
         // That means clicking such an URI which contains a testnet payment request
         // will start a mainnet instance and throw a "wrong network" error.
-        if (arg.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // bitgreen: URI
+        if (arg.startsWith(BOGCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // bogcoin: URI
         {
             savedPaymentRequests.append(arg);
 
             SendCoinsRecipient r;
-            if (GUIUtil::parseBitcoinURI(arg, &r) && !r.address.isEmpty()) {
-                CBitcoinAddress address(r.address.toStdString());
+            if (GUIUtil::parseBogcoinURI(arg, &r) && !r.address.isEmpty()) {
+                CBogcoinAddress address(r.address.toStdString());
 
                 if (address.IsValid(Params(CBaseChainParams::MAIN))) {
                     SelectParams(CBaseChainParams::MAIN);
@@ -238,7 +238,7 @@ bool PaymentServer::ipcSendCommandLine()
     foreach (const QString& r, savedPaymentRequests) {
         QLocalSocket* socket = new QLocalSocket();
         socket->connectToServer(ipcServerName(), QIODevice::WriteOnly);
-        if (!socket->waitForConnected(BITCOIN_IPC_CONNECT_TIMEOUT)) {
+        if (!socket->waitForConnected(BOGCOIN_IPC_CONNECT_TIMEOUT)) {
             delete socket;
             socket = nullptr;
             return false;
@@ -252,7 +252,7 @@ bool PaymentServer::ipcSendCommandLine()
 
         socket->write(block);
         socket->flush();
-        socket->waitForBytesWritten(BITCOIN_IPC_CONNECT_TIMEOUT);
+        socket->waitForBytesWritten(BOGCOIN_IPC_CONNECT_TIMEOUT);
         socket->disconnectFromServer();
 
         delete socket;
@@ -274,7 +274,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer) : QObject(p
     GOOGLE_PROTOBUF_VERIFY_VERSION;
 
     // Install global event filter to catch QFileOpenEvents
-    // on Mac: sent when you click bitgreen: links
+    // on Mac: sent when you click bogcoin: links
     // other OSes: helpful when dealing with payment request files (in the future)
     if (parent)
         parent->installEventFilter(this);
@@ -290,7 +290,7 @@ PaymentServer::PaymentServer(QObject* parent, bool startLocalServer) : QObject(p
         if (!uriServer->listen(name)) {
             // constructor is called early in init, so don't use "emit message()" here
             QMessageBox::critical(0, tr("Payment request error"),
-                tr("Cannot start bitgreen: click-to-pay handler"));
+                tr("Cannot start bogcoin: click-to-pay handler"));
         } else {
             connect(uriServer, SIGNAL(newConnection()), this, SLOT(handleURIConnection()));
             connect(this, SIGNAL(receivedPaymentACK(QString)), this, SLOT(handlePaymentACK(QString)));
@@ -304,12 +304,12 @@ PaymentServer::~PaymentServer()
 }
 
 //
-// OSX-specific way of handling bitgreen: URIs and
+// OSX-specific way of handling bogcoin: URIs and
 // PaymentRequest mime types
 //
 bool PaymentServer::eventFilter(QObject* object, QEvent* event)
 {
-    // clicking on bitgreen: URIs creates FileOpen events on the Mac
+    // clicking on bogcoin: URIs creates FileOpen events on the Mac
     if (event->type() == QEvent::FileOpen) {
         QFileOpenEvent* fileEvent = static_cast<QFileOpenEvent*>(event);
         if (!fileEvent->file().isEmpty())
@@ -330,7 +330,7 @@ void PaymentServer::initNetManager()
     if (netManager != nullptr)
         delete netManager;
 
-    // netManager is used to fetch paymentrequests given in bitgreen: URIs
+    // netManager is used to fetch paymentrequests given in bogcoin: URIs
     netManager = new QNetworkAccessManager(this);
 
     QNetworkProxy proxy;
@@ -367,7 +367,7 @@ void PaymentServer::handleURIOrFile(const QString& s)
         return;
     }
 
-    if (s.startsWith(BITCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // bitgreen: URI
+    if (s.startsWith(BOGCOIN_IPC_PREFIX, Qt::CaseInsensitive)) // bogcoin: URI
     {
         QUrlQuery uri((QUrl(s)));
         if (uri.hasQueryItem("r")) // payment request URI
@@ -391,8 +391,8 @@ void PaymentServer::handleURIOrFile(const QString& s)
         } else // normal URI
         {
             SendCoinsRecipient recipient;
-            if (GUIUtil::parseBitcoinURI(s, &recipient)) {
-                CBitcoinAddress address(recipient.address.toStdString());
+            if (GUIUtil::parseBogcoinURI(s, &recipient)) {
+                CBogcoinAddress address(recipient.address.toStdString());
                 if (!address.IsValid()) {
                     emit message(tr("URI handling"), tr("Invalid payment address %1").arg(recipient.address),
                         CClientUIInterface::MSG_ERROR);
@@ -400,7 +400,7 @@ void PaymentServer::handleURIOrFile(const QString& s)
                     emit receivedPaymentRequest(recipient);
             } else
                 emit message(tr("URI handling"),
-                    tr("URI cannot be parsed! This can be caused by an invalid BitGreen address or malformed URI parameters."),
+                    tr("URI cannot be parsed! This can be caused by an invalid BogCoin address or malformed URI parameters."),
                     CClientUIInterface::ICON_WARNING);
 
             return;
@@ -513,9 +513,9 @@ bool PaymentServer::processPaymentRequest(PaymentRequestPlus& request, SendCoins
         CTxDestination dest;
         if (ExtractDestination(sendingTo.first, dest)) {
             // Append destination address
-            addresses.append(QString::fromStdString(CBitcoinAddress(dest).ToString()));
+            addresses.append(QString::fromStdString(CBogcoinAddress(dest).ToString()));
         } else if (!recipient.authenticatedMerchant.isEmpty()) {
-            // Insecure payments to custom bitg addresses are not supported
+            // Insecure payments to custom bog addresses are not supported
             // (there is no good way to tell the user where they are paying in a way
             // they'd have a chance of understanding).
             emit message(tr("Payment request rejected"),
@@ -527,7 +527,7 @@ bool PaymentServer::processPaymentRequest(PaymentRequestPlus& request, SendCoins
         // Extract and check amounts
         CTxOut txOut(sendingTo.second, sendingTo.first);
         if (txOut.IsDust(::minRelayTxFee)) {
-            emit message(tr("Payment request error"), tr("Requested payment amount of %1 is too small (considered dust).").arg(BitcoinUnits::formatWithUnit(optionsModel->getDisplayUnit(), sendingTo.second)),
+            emit message(tr("Payment request error"), tr("Requested payment amount of %1 is too small (considered dust).").arg(BogcoinUnits::formatWithUnit(optionsModel->getDisplayUnit(), sendingTo.second)),
                 CClientUIInterface::MSG_ERROR);
 
             return false;

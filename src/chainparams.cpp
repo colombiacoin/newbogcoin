@@ -1,8 +1,8 @@
 // Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bogcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -110,25 +110,25 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // BitGreen: 1 day
-        nTargetSpacing = 2 * 60;  // BitGreen: 2 minutes
+        nTargetTimespan = 1 * 60; // BogCoin: 1 day
+        nTargetSpacing = 2 * 60;  // BogCoin: 2 minutes
         nStakingMinInput = 200 * COIN;
         nMaturity = 10;
         nMasternodeCountDrift = 20;
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 200;
-        nModifierUpdateBlock = 1; // we use the version 2 for BITG
+        nModifierUpdateBlock = 1; // we use the version 2 for BOG
 
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
          * be spent as it did not originally exist in the database.
          *
-         * genesis.py -a quark-hash -z "Even With Energy Surplus, Canada Unable to Meet Electricity Demands of Bitcoin Miners" -t 1516926684 -v 0 -p 04e5a8143f86ad8ac63791fbbdb8e0b91a8da88c8c693a95f6c2c13c063ea790f7960b8025a9047a7bc671d5cfe707a2dd2e13b86182e1064a0eea7bf863636363
+         * genesis.py -a quark-hash -z "Even With Energy Surplus, Canada Unable to Meet Electricity Demands of Bogcoin Miners" -t 1516926684 -v 0 -p 04e5a8143f86ad8ac63791fbbdb8e0b91a8da88c8c693a95f6c2c13c063ea790f7960b8025a9047a7bc671d5cfe707a2dd2e13b86182e1064a0eea7bf863636363
          * 04ffff001d01042642544320426c6f636b20353031353932202d20323031372d31322d32392031353a34333a3337
          * algorithm: quark-hash
          * merkle hash: 07cbcacfc822fba6bbeb05312258fa43b96a68fc310af8dfcec604591763f7cf
-         * pszTimestamp: Even With Energy Surplus, Canada Unable to Meet Electricity Demands of Bitcoin Miners
+         * pszTimestamp: Even With Energy Surplus, Canada Unable to Meet Electricity Demands of Bogcoin Miners
          * pubkey: 04e5a8143f86ad8ac63791fbbdb8e0b91a8da88c8c693a95f6c2c13c063ea790f7960b8025a9047a7bc671d5cfe707a2dd2e13b86182e1064a0eea7bf863636363
          * time: 1516926684
          * bits: 0x1e0ffff0
@@ -157,21 +157,21 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0x07cbcacfc822fba6bbeb05312258fa43b96a68fc310af8dfcec604591763f7cf"));
 
         // DNS Seeding
-        vSeeds.push_back(CDNSSeedData("seed1.bitg.org", "seed1.bitg.org"));
-        vSeeds.push_back(CDNSSeedData("seed2.bitg.org", "seed2.bitg.org"));
-        vSeeds.push_back(CDNSSeedData("seed3.bitg.org", "seed3.bitg.org"));
+        vSeeds.push_back(CDNSSeedData("seed1.bogcoin.co", "seed1.bogcoin.co"));
+        vSeeds.push_back(CDNSSeedData("seed2.bogcoin.co", "seed2.bogcoin.co"));
+        vSeeds.push_back(CDNSSeedData("seed3.bogcoin.co", "seed3.bogcoin.co"));
 
-        // BitGreen addresses start with 'G'
+        // BogCoin addresses start with 'G'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 38);
-        // BitGreen script addresses start with '3'
+        // BogCoin script addresses start with '3'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 6);
-        // BitGreen private keys start with 'K'
+        // BogCoin private keys start with 'K'
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 46);
-        // BitGreen BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
+        // BogCoin BIP32 pubkeys start with 'xpub' (Bogcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
-        // BitGreen BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
+        // BogCoin BIP32 prvkeys start with 'xprv' (Bogcoin defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
-        // BitGreen BIP44 coin type is '222' (0x800000de)
+        // BogCoin BIP44 coin type is '222' (0x800000de)
         // BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0xde).convert_to_container<std::vector<unsigned char> >();
 
@@ -221,8 +221,8 @@ public:
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // BitGreen: 1 day
-        nTargetSpacing = 2 * 60;  // BitGreen: 1 minute
+        nTargetTimespan = 1 * 60; // BogCoin: 1 day
+        nTargetSpacing = 2 * 60;  // BogCoin: 1 minute
         nStakingMinInput = 0;
         nLastPOWBlock = 200;
         nMaturity = 15;
@@ -239,17 +239,17 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 
-        // Testnet BitGreen addresses start with 'g'
+        // Testnet BogCoin addresses start with 'g'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 98);
-        // Testnet BitGreen script addresses start with '5' or '6'
+        // Testnet BogCoin script addresses start with '5' or '6'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 12);
         // Testnet private keys start with 'k'
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 108);
-        // Testnet BitGreen BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
+        // Testnet BogCoin BIP32 pubkeys start with 'tpub' (Bogcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
-        // Testnet BitGreen BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
+        // Testnet BogCoin BIP32 prvkeys start with 'tprv' (Bogcoin defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
-        // Testnet BitGreen BIP44 coin type is '1' (All coin's testnet default)
+        // Testnet BogCoin BIP44 coin type is '1' (All coin's testnet default)
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));
@@ -295,8 +295,8 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
-        nTargetTimespan = 24 * 60 * 60; // BitGreen: 1 day
-        nTargetSpacing = 1 * 60;        // BitGreen: 1 minute
+        nTargetTimespan = 24 * 60 * 60; // BogCoin: 1 day
+        nTargetSpacing = 1 * 60;        // BogCoin: 1 minute
         nStakingMinInput = 0;
         bnProofOfWorkLimit = ~arith_uint256(0) >> 1;
         nLastPOWBlock = 250;

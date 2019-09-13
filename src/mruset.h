@@ -1,9 +1,9 @@
-// Copyright (c) 2012 The Bitcoin developers
+// Copyright (c) 2012 The Bogcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_MRUSET_H
-#define BITCOIN_MRUSET_H
+#ifndef BOGCOIN_MRUSET_H
+#define BOGCOIN_MRUSET_H
 
 #include <deque>
 #include <set>
@@ -66,4 +66,4 @@ public:
     }
 };
 
-#endif // BITCOIN_MRUSET_H
+#endif // BOGCOIN_MRUSET_H

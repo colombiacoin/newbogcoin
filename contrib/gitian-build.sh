@@ -1,4 +1,4 @@
-# Copyright (c) 2016 The Bitcoin Core developers
+# Copyright (c) 2016 The Bogcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,12 +17,12 @@ osx=true
 SIGNER=
 VERSION=
 commit=false
-url=https://github.com/bitgreen-official/bitgreen
+url=https://github.com/bogcoin-official/bogcoin
 proc=2
 mem=2000
 lxc=true
 osslTarUrl=http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
-osslPatchUrl=https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
+osslPatchUrl=https://bogcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
 scriptName=$(basename -- "$0")
 signProg="gpg --detach-sign"
 commitFiles=true
@@ -31,7 +31,7 @@ commitFiles=true
 read -d '' usage <<- EOF
 Usage: $scriptName [-c|u|v|b|s|B|o|h|j|m|] signer version
 
-Run this script from the directory containing the bitgreen, gitian-builder, gitian.sigs, and bitgreen-detached-sigs.
+Run this script from the directory containing the bogcoin, gitian-builder, gitian.sigs, and bogcoin-detached-sigs.
 
 Arguments:
 signer          GPG signer to sign each build assert file
@@ -39,7 +39,7 @@ version		Version number, commit, or branch to build. If building a commit or bra
 
 Options:
 -c|--commit	Indicate that the version argument is for a commit or branch
--u|--url	Specify the URL of the repository. Default is https://github.com/bitgreen-official/bitgreen
+-u|--url	Specify the URL of the repository. Default is https://github.com/bogcoin-official/bogcoin
 -v|--verify 	Verify the gitian build
 -b|--build	Do a gitian build
 -s|--sign	Make signed binaries for Windows and Mac OSX
@@ -237,8 +237,8 @@ echo ${COMMIT}
 if [[ $setup = true ]]
 then
     sudo apt-get install ruby apache2 git apt-cacher-ng python-vm-builder qemu-kvm qemu-utils
-    git clone https://github.com/bitgreen/gitian.sigs.git
-    git clone https://github.com/bitgreen-official/bitgreen-detached-sigs.git
+    git clone https://github.com/bogcoin/gitian.sigs.git
+    git clone https://github.com/bogcoin-official/bogcoin-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
     pushd ./gitian-builder
     if [[ -n "$USE_LXC" ]]
@@ -252,7 +252,7 @@ then
 fi
 
 # Set up build
-pushd ./bitgreen
+pushd ./bogcoin
 git fetch
 git checkout ${COMMIT}
 popd
@@ -261,7 +261,7 @@ popd
 if [[ $build = true ]]
 then
 	# Make output folder
-	mkdir -p ./bitgreen-binaries/${VERSION}
+	mkdir -p ./bogcoin-binaries/${VERSION}
 
 	# Build Dependencies
 	echo ""
@@ -271,7 +271,7 @@ then
 	mkdir -p inputs
 	wget -N -P inputs $osslPatchUrl
 	wget -N -P inputs $osslTarUrl
-	make -C ../bitgreen/depends download SOURCES_PATH=`pwd`/cache/common
+	make -C ../bogcoin/depends download SOURCES_PATH=`pwd`/cache/common
 
 	# Linux
 	if [[ $linux = true ]]
@@ -279,9 +279,9 @@ then
             echo ""
 	    echo "Compiling ${VERSION} Linux"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit bitgreen=${COMMIT} --url bitgreen=${url} ../bitgreen/contrib/gitian-descriptors/gitian-linux.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../bitgreen/contrib/gitian-descriptors/gitian-linux.yml
-	    mv build/out/bitgreen-*.tar.gz build/out/src/bitgreen-*.tar.gz ../bitgreen-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit bogcoin=${COMMIT} --url bogcoin=${url} ../bogcoin/contrib/gitian-descriptors/gitian-linux.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../bogcoin/contrib/gitian-descriptors/gitian-linux.yml
+	    mv build/out/bogcoin-*.tar.gz build/out/src/bogcoin-*.tar.gz ../bogcoin-binaries/${VERSION}
 	fi
 	# Windows
 	if [[ $windows = true ]]
@@ -289,10 +289,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit bitgreen=${COMMIT} --url bitgreen=${url} ../bitgreen/contrib/gitian-descriptors/gitian-win.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../bitgreen/contrib/gitian-descriptors/gitian-win.yml
-	    mv build/out/bitgreen-*-win-unsigned.tar.gz inputs/bitgreen-win-unsigned.tar.gz
-	    mv build/out/bitgreen-*.zip build/out/bitgreen-*.exe ../bitgreen-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit bogcoin=${COMMIT} --url bogcoin=${url} ../bogcoin/contrib/gitian-descriptors/gitian-win.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../bogcoin/contrib/gitian-descriptors/gitian-win.yml
+	    mv build/out/bogcoin-*-win-unsigned.tar.gz inputs/bogcoin-win-unsigned.tar.gz
+	    mv build/out/bogcoin-*.zip build/out/bogcoin-*.exe ../bogcoin-binaries/${VERSION}
 	fi
 	# Mac OSX
 	if [[ $osx = true ]]
@@ -300,10 +300,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit bitgreen=${COMMIT} --url bitgreen=${url} ../bitgreen/contrib/gitian-descriptors/gitian-osx.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../bitgreen/contrib/gitian-descriptors/gitian-osx.yml
-	    mv build/out/bitgreen-*-osx-unsigned.tar.gz inputs/bitgreen-osx-unsigned.tar.gz
-	    mv build/out/bitgreen-*.tar.gz build/out/bitgreen-*.dmg ../bitgreen-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit bogcoin=${COMMIT} --url bogcoin=${url} ../bogcoin/contrib/gitian-descriptors/gitian-osx.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../bogcoin/contrib/gitian-descriptors/gitian-osx.yml
+	    mv build/out/bogcoin-*-osx-unsigned.tar.gz inputs/bogcoin-osx-unsigned.tar.gz
+	    mv build/out/bogcoin-*.tar.gz build/out/bogcoin-*.dmg ../bogcoin-binaries/${VERSION}
 	fi
 	# AArch64
 	if [[ $aarch64 = true ]]
@@ -311,9 +311,9 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} AArch64"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit bitgreen=${COMMIT} --url bitgreen=${url} ../bitgreen/contrib/gitian-descriptors/gitian-aarch64.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-aarch64 --destination ../gitian.sigs/ ../bitgreen/contrib/gitian-descriptors/gitian-aarch64.yml
-	    mv build/out/bitgreen-*.tar.gz build/out/src/bitgreen-*.tar.gz ../bitgreen-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit bogcoin=${COMMIT} --url bogcoin=${url} ../bogcoin/contrib/gitian-descriptors/gitian-aarch64.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-aarch64 --destination ../gitian.sigs/ ../bogcoin/contrib/gitian-descriptors/gitian-aarch64.yml
+	    mv build/out/bogcoin-*.tar.gz build/out/src/bogcoin-*.tar.gz ../bogcoin-binaries/${VERSION}
 	popd
 
         if [[ $commitFiles = true ]]
@@ -340,32 +340,32 @@ then
 	echo ""
 	echo "Verifying v${VERSION} Linux"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../bitgreen/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../bogcoin/contrib/gitian-descriptors/gitian-linux.yml
 	# Windows
 	echo ""
 	echo "Verifying v${VERSION} Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../bitgreen/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../bogcoin/contrib/gitian-descriptors/gitian-win.yml
 	# Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../bitgreen/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../bogcoin/contrib/gitian-descriptors/gitian-osx.yml
 	# AArch64
 	echo ""
 	echo "Verifying v${VERSION} AArch64"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-aarch64 ../bitgreen/contrib/gitian-descriptors/gitian-aarch64.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-aarch64 ../bogcoin/contrib/gitian-descriptors/gitian-aarch64.yml
 	# Signed Windows
 	echo ""
 	echo "Verifying v${VERSION} Signed Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bitgreen/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bogcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
 	# Signed Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Signed Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bitgreen/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bogcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
 	popd
 fi
 
@@ -380,10 +380,10 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../bitgreen/contrib/gitian-descriptors/gitian-win-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../bitgreen/contrib/gitian-descriptors/gitian-win-signer.yml
-	    mv build/out/bitgreen-*win64-setup.exe ../bitgreen-binaries/${VERSION}
-	    mv build/out/bitgreen-*win32-setup.exe ../bitgreen-binaries/${VERSION}
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../bogcoin/contrib/gitian-descriptors/gitian-win-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../bogcoin/contrib/gitian-descriptors/gitian-win-signer.yml
+	    mv build/out/bogcoin-*win64-setup.exe ../bogcoin-binaries/${VERSION}
+	    mv build/out/bogcoin-*win32-setup.exe ../bogcoin-binaries/${VERSION}
 	fi
 	# Sign Mac OSX
 	if [[ $osx = true ]]
@@ -391,9 +391,9 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../bitgreen/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../bitgreen/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    mv build/out/bitgreen-osx-signed.dmg ../bitgreen-binaries/${VERSION}/bitgreen-${VERSION}-osx.dmg
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../bogcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../bogcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    mv build/out/bogcoin-osx-signed.dmg ../bogcoin-binaries/${VERSION}/bogcoin-${VERSION}-osx.dmg
 	fi
 	popd
 

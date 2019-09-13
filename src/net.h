@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bogcoin developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_NET_H
-#define BITCOIN_NET_H
+#ifndef BOGCOIN_NET_H
+#define BOGCOIN_NET_H
 
 #include "bloom.h"
 #include "compat.h"
@@ -760,4 +760,4 @@ public:
 
 void DumpBanlist();
 
-#endif // BITCOIN_NET_H
+#endif // BOGCOIN_NET_H

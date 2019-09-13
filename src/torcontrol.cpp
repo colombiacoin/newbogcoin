@@ -1,7 +1,7 @@
-// Copyright (c) 2015-2016 The Bitcoin Core developers
+// Copyright (c) 2015-2016 The Bogcoin Core developers
 // Copyright (c) 2017 The Zcash developers
 // Copyright (c) 2017-2017 The PIVX developers
-// Copyright (c) 2019 The BitGreen Core developers
+// Copyright (c) 2019 The BogCoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -406,7 +406,7 @@ static bool WriteBinaryFile(const std::string &filename, const std::string &data
     return true;
 }
 
-/****** Bitcoin specific TorController implementation ********/
+/****** Bogcoin specific TorController implementation ********/
 
 /** Controller that connects to Tor control socket, authenticate, then create
  * and maintain a ephemeral hidden service.

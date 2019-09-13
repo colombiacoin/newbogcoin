@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bogcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2017 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_POW_H
-#define BITCOIN_POW_H
+#ifndef BOGCOIN_POW_H
+#define BOGCOIN_POW_H
 
 #include <stdint.h>
 
@@ -18,7 +18,7 @@ class arith_uint256;
 // Define difficulty retarget algorithms
 enum DiffMode {
     DIFF_DEFAULT = 0, // Default to invalid 0
-    DIFF_BTC = 1,     // Retarget every x blocks (Bitcoin style)
+    DIFF_BOG = 1,     // Retarget every x blocks (Bogcoin style)
     DIFF_KGW = 2,     // Retarget using Kimoto Gravity Well
     DIFF_DGW = 3,     // Retarget using Dark Gravity Wave v3
 };
@@ -29,4 +29,4 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 bool CheckProofOfWork(uint256 hash, unsigned int nBits);
 arith_uint256 GetBlockProof(const CBlockIndex& block);
 
-#endif // BITCOIN_POW_H
+#endif // BOGCOIN_POW_H

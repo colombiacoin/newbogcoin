@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bogcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_SCRIPT_SIGN_H
-#define BITCOIN_SCRIPT_SIGN_H
+#ifndef BOGCOIN_SCRIPT_SIGN_H
+#define BOGCOIN_SCRIPT_SIGN_H
 
 #include "script/interpreter.h"
 #include "key.h"
@@ -27,4 +27,4 @@ bool SignSignature(const CKeyStore& keystore, const CTransaction& txFrom, CMutab
  */
 CScript CombineSignatures(const CScript& scriptPubKey, const CTransaction& txTo, unsigned int nIn, const CScript& scriptSig1, const CScript& scriptSig2);
 
-#endif // BITCOIN_SCRIPT_SIGN_H
+#endif // BOGCOIN_SCRIPT_SIGN_H

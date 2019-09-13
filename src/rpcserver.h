@@ -1,12 +1,12 @@
 // Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bogcoin developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2019 The BitGreen Core developers
+// Copyright (c) 2019 The BogCoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_RPCSERVER_H
-#define BITCOIN_RPCSERVER_H
+#ifndef BOGCOIN_RPCSERVER_H
+#define BOGCOIN_RPCSERVER_H
 
 #include "amount.h"
 #include "rpcprotocol.h"
@@ -128,7 +128,7 @@ public:
 };
 
 /**
- * BitGreen RPC command dispatcher.
+ * BogCoin RPC command dispatcher.
  */
 class CRPCTable
 {
@@ -323,4 +323,4 @@ void InterruptRPC();
 void StopRPC();
 std::string JSONRPCExecBatch(const UniValue& vReq);
 
-#endif // BITCOIN_RPCSERVER_H
+#endif // BOGCOIN_RPCSERVER_H

@@ -1,16 +1,16 @@
-// Copyright (c) 2014 The Bitcoin developers
+// Copyright (c) 2014 The Bogcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_CHAINPARAMSBASE_H
-#define BITCOIN_CHAINPARAMSBASE_H
+#ifndef BOGCOIN_CHAINPARAMSBASE_H
+#define BOGCOIN_CHAINPARAMSBASE_H
 
 #include <string>
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between bitgreen-cli and bitgreend)
- * of a given instance of the BitGreen system.
+ * CBaseChainParams defines the base parameters (shared between bogcoin-cli and bogcoind)
+ * of a given instance of the BogCoin system.
  */
 class CBaseChainParams
 {
@@ -62,4 +62,4 @@ bool SelectBaseParamsFromCommandLine();
  */
 bool AreBaseParamsConfigured();
 
-#endif // BITCOIN_CHAINPARAMSBASE_H
+#endif // BOGCOIN_CHAINPARAMSBASE_H

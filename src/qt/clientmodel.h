@@ -1,11 +1,11 @@
-// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2011-2014 The Bogcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_CLIENTMODEL_H
-#define BITCOIN_QT_CLIENTMODEL_H
+#ifndef BOGCOIN_QT_CLIENTMODEL_H
+#define BOGCOIN_QT_CLIENTMODEL_H
 
 #include <QObject>
 
@@ -35,7 +35,7 @@ enum NumConnections {
     CONNECTIONS_ALL = (CONNECTIONS_IN | CONNECTIONS_OUT),
 };
 
-/** Model for BitGreen network client. */
+/** Model for BogCoin network client. */
 class ClientModel : public QObject
 {
     Q_OBJECT
@@ -109,4 +109,4 @@ public slots:
     void updateAlert(const QString& hash, int status);
 };
 
-#endif // BITCOIN_QT_CLIENTMODEL_H
+#endif // BOGCOIN_QT_CLIENTMODEL_H

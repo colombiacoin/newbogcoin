@@ -1,9 +1,9 @@
-// Copyright (c) 2014 The Bitcoin developers
+// Copyright (c) 2014 The Bogcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_CRYPTO_COMMON_H
-#define BITCOIN_CRYPTO_COMMON_H
+#ifndef BOGCOIN_CRYPTO_COMMON_H
+#define BOGCOIN_CRYPTO_COMMON_H
 
 #include <stdint.h>
 
@@ -113,4 +113,4 @@ void static inline WriteBE64(unsigned char* ptr, uint64_t x)
 #endif
 }
 
-#endif // BITCOIN_CRYPTO_COMMON_H
+#endif // BOGCOIN_CRYPTO_COMMON_H

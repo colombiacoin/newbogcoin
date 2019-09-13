@@ -1,11 +1,11 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
+// Copyright (c) 2011-2013 The Bogcoin developers
 // Copyright (c) 2017-2018 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_OPTIONSMODEL_H
-#define BITCOIN_QT_OPTIONSMODEL_H
+#ifndef BOGCOIN_QT_OPTIONSMODEL_H
+#define BOGCOIN_QT_OPTIONSMODEL_H
 
 #include "amount.h"
 
@@ -15,7 +15,7 @@ QT_BEGIN_NAMESPACE
 class QNetworkProxy;
 QT_END_NAMESPACE
 
-/** Interface from Qt to configuration data structure for Bitcoin client.
+/** Interface from Qt to configuration data structure for Bogcoin client.
    To Qt, the options are presented as a list with the different options
    laid out vertically.
    This can be changed to a tree once the settings become sufficiently
@@ -36,7 +36,7 @@ public:
         ProxyUse,            // bool
         ProxyIP,             // QString
         ProxyPort,           // int
-        DisplayUnit,         // BitcoinUnits::Unit
+        DisplayUnit,         // BogcoinUnits::Unit
         ThirdPartyTxUrls,    // QString
         Digits,              // QString
         Language,            // QString
@@ -101,4 +101,4 @@ signals:
     void hideZeroBalancesChanged(bool);
 };
 
-#endif // BITCOIN_QT_OPTIONSMODEL_H
+#endif // BOGCOIN_QT_OPTIONSMODEL_H

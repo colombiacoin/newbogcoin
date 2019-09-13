@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2015 The Bitcoin Core developers
+// Copyright (c) 2011-2015 The Bogcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -121,7 +121,7 @@ QVariant ProposalTableModel::data(const QModelIndex &index, int role) const
             if(rec->percentage < 100) return tr("%1\%").arg(rec->percentage);
             return QString("%1\%").arg(rec->percentage);
         case Amount:
-            return QString("%1 / Superblock").arg(BitcoinUnits::floorWithUnit(BitcoinUnits::BITG, rec->amount));
+            return QString("%1 / Superblock").arg(BogcoinUnits::floorWithUnit(BogcoinUnits::BOG, rec->amount));
         }
         break;
     case Qt::ToolTipRole:

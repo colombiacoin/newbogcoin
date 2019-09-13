@@ -1,12 +1,12 @@
-// Copyright (c) 2012-2014 The Bitcoin developers
+// Copyright (c) 2012-2014 The Bogcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_VERSION_H
-#define BITCOIN_VERSION_H
+#ifndef BOGCOIN_VERSION_H
+#define BOGCOIN_VERSION_H
 
 /**
  * network protocol versioning
@@ -45,4 +45,4 @@ static const int NO_BLOOM_VERSION = 70005;
 //! Community proposal starts with this version
 static const int COMMUNITY_PROPOSAL_VERSION = 70913;
 
-#endif // BITCOIN_VERSION_H
+#endif // BOGCOIN_VERSION_H

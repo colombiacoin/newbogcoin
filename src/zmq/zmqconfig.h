@@ -1,12 +1,12 @@
-// Copyright (c) 2015 The Bitcoin Core developers
+// Copyright (c) 2015 The Bogcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_ZMQ_ZMQCONFIG_H
-#define BITCOIN_ZMQ_ZMQCONFIG_H
+#ifndef BOGCOIN_ZMQ_ZMQCONFIG_H
+#define BOGCOIN_ZMQ_ZMQCONFIG_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitgreen-config.h"
+#include "config/bogcoin-config.h"
 #endif
 
 #include <stdarg.h>
@@ -21,4 +21,4 @@
 
 void zmqError(const char *str);
 
-#endif // BITCOIN_ZMQ_ZMQCONFIG_H
+#endif // BOGCOIN_ZMQ_ZMQCONFIG_H

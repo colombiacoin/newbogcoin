@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bogcoin developers
 // Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_CHAIN_H
-#define BITCOIN_CHAIN_H
+#ifndef BOGCOIN_CHAIN_H
+#define BOGCOIN_CHAIN_H
 
 #include "arith_uint256.h"
 #include "pow.h"
@@ -548,4 +548,4 @@ public:
     const CBlockIndex* FindFork(const CBlockIndex* pindex) const;
 };
 
-#endif // BITCOIN_CHAIN_H
+#endif // BOGCOIN_CHAIN_H

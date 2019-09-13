@@ -1,9 +1,9 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
+// Copyright (c) 2011-2013 The Bogcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_TRANSACTIONDESCDIALOG_H
-#define BITCOIN_QT_TRANSACTIONDESCDIALOG_H
+#ifndef BOGCOIN_QT_TRANSACTIONDESCDIALOG_H
+#define BOGCOIN_QT_TRANSACTIONDESCDIALOG_H
 
 #include <QDialog>
 
@@ -29,4 +29,4 @@ private:
     Ui::TransactionDescDialog* ui;
 };
 
-#endif // BITCOIN_QT_TRANSACTIONDESCDIALOG_H
+#endif // BOGCOIN_QT_TRANSACTIONDESCDIALOG_H

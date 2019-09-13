@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bogcoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_AMOUNT_H
-#define BITCOIN_AMOUNT_H
+#ifndef BOGCOIN_AMOUNT_H
+#define BOGCOIN_AMOUNT_H
 
 #include "serialize.h"
 
@@ -50,8 +50,8 @@ public:
 
 /** No amount larger than this (in satoshi) is valid.
  *
- * Note that this constant is *not* the total money supply, which in BitGreen
- * currently happens to be less than 21,000,000 BITG for various reasons, but
+ * Note that this constant is *not* the total money supply, which in BogCoin
+ * currently happens to be less than 21,000,000 BOG for various reasons, but
  * rather a sanity check. As this sanity check is used by consensus-critical
  * validation code, the exact value of the MAX_MONEY constant is consensus
  * critical; in unusual circumstances like a(nother) overflow bug that allowed
@@ -60,4 +60,4 @@ public:
 static const CAmount MAX_MONEY = 21000000 * COIN;
 inline bool MoneyRange(const CAmount nValueOut) { return nValueOut >= 0 && nValueOut <= MAX_MONEY; }
 
-#endif //  BITCOIN_AMOUNT_H
+#endif //  BOGCOIN_AMOUNT_H

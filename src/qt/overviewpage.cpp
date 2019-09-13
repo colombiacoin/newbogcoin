@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2011-2014 The Bogcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
@@ -7,7 +7,7 @@
 #include "overviewpage.h"
 #include "ui_overviewpage.h"
 
-#include "bitcoinunits.h"
+#include "bogcoinunits.h"
 #include "clientmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -33,7 +33,7 @@ class TxViewDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
 public:
-    TxViewDelegate() : QAbstractItemDelegate(), unit(BitcoinUnits::BITG)
+    TxViewDelegate() : QAbstractItemDelegate(), unit(BogcoinUnits::BOG)
     {
     }
 
@@ -78,7 +78,7 @@ public:
             foreground = COLOR_NEGATIVE;
 
         painter->setPen(foreground);
-        QString amountText = BitcoinUnits::formatWithUnit(unit, amount, true, BitcoinUnits::separatorNever);
+        QString amountText = BogcoinUnits::formatWithUnit(unit, amount, true, BogcoinUnits::separatorNever);
         if (!confirmed) {
             amountText = QString("[") + amountText + QString("]");
         }
@@ -159,27 +159,27 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
         nWatchOnlyLockedBalance = pwalletMain->GetLockedWatchOnlyBalance();
     }
 
-    // BITG Balance
+    // BOG Balance
     CAmount nTotalBalance = balance + unconfirmedBalance;
     CAmount nAvailableBalance = balance - immatureBalance - nLockedBalance;
 
-    // BITG Watch-Only Balance
+    // BOG Watch-Only Balance
     CAmount nTotalWatchBalance = watchOnlyBalance + watchUnconfBalance;
     CAmount nAvailableWatchBalance = watchOnlyBalance - watchImmatureBalance - nWatchOnlyLockedBalance;
 
-    // BITG labels
-    ui->labelAvailable->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nAvailableBalance, false, BitcoinUnits::separatorNever));
-    ui->labelPending->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, unconfirmedBalance, false, BitcoinUnits::separatorNever));
-    ui->labelImmature->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, immatureBalance, false, BitcoinUnits::separatorNever));
-    ui->labelLocked->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nLockedBalance, false, BitcoinUnits::separatorNever));
-    ui->labelTotal->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nTotalBalance, false, BitcoinUnits::separatorNever));
+    // BOG labels
+    ui->labelAvailable->setText(BogcoinUnits::floorHtmlWithUnit(nDisplayUnit, nAvailableBalance, false, BogcoinUnits::separatorNever));
+    ui->labelPending->setText(BogcoinUnits::floorHtmlWithUnit(nDisplayUnit, unconfirmedBalance, false, BogcoinUnits::separatorNever));
+    ui->labelImmature->setText(BogcoinUnits::floorHtmlWithUnit(nDisplayUnit, immatureBalance, false, BogcoinUnits::separatorNever));
+    ui->labelLocked->setText(BogcoinUnits::floorHtmlWithUnit(nDisplayUnit, nLockedBalance, false, BogcoinUnits::separatorNever));
+    ui->labelTotal->setText(BogcoinUnits::floorHtmlWithUnit(nDisplayUnit, nTotalBalance, false, BogcoinUnits::separatorNever));
 
     // Watchonly labels
-    ui->labelWatchAvailable->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nAvailableWatchBalance, false, BitcoinUnits::separatorNever));
-    ui->labelWatchPending->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchUnconfBalance, false, BitcoinUnits::separatorNever));
-    ui->labelWatchImmature->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchImmatureBalance, false, BitcoinUnits::separatorNever));
-    ui->labelWatchLocked->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nWatchOnlyLockedBalance, false, BitcoinUnits::separatorNever));
-    ui->labelWatchTotal->setText(BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, nTotalWatchBalance, false, BitcoinUnits::separatorNever));
+    ui->labelWatchAvailable->setText(BogcoinUnits::floorHtmlWithUnit(nDisplayUnit, nAvailableWatchBalance, false, BogcoinUnits::separatorNever));
+    ui->labelWatchPending->setText(BogcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchUnconfBalance, false, BogcoinUnits::separatorNever));
+    ui->labelWatchImmature->setText(BogcoinUnits::floorHtmlWithUnit(nDisplayUnit, watchImmatureBalance, false, BogcoinUnits::separatorNever));
+    ui->labelWatchLocked->setText(BogcoinUnits::floorHtmlWithUnit(nDisplayUnit, nWatchOnlyLockedBalance, false, BogcoinUnits::separatorNever));
+    ui->labelWatchTotal->setText(BogcoinUnits::floorHtmlWithUnit(nDisplayUnit, nTotalWatchBalance, false, BogcoinUnits::separatorNever));
 
     // Only show most balances if they are non-zero for the sake of simplicity
     QSettings settings;
@@ -281,7 +281,7 @@ void OverviewPage::setWalletModel(WalletModel* model)
         connect(model, SIGNAL(notifyWatchonlyChanged(bool)), this, SLOT(updateWatchOnlyLabels(bool)));
     }
 
-    // update the display unit, to not use the default ("BITG")
+    // update the display unit, to not use the default ("BOG")
     updateDisplayUnit();
 }
 

@@ -1,10 +1,10 @@
 // Copyright (c) 2017 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_MULTISENDDIALOG_H
-#define BITCOIN_QT_MULTISENDDIALOG_H
+#ifndef BOGCOIN_QT_MULTISENDDIALOG_H
+#define BOGCOIN_QT_MULTISENDDIALOG_H
 
 #include <QDialog>
 
@@ -39,4 +39,4 @@ private:
     WalletModel* model;
 };
 
-#endif // BITCOIN_QT_MULTISENDDIALOG_H
+#endif // BOGCOIN_QT_MULTISENDDIALOG_H

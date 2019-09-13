@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# Copyright (c) 2014 The Bitcoin Core developers
+# Copyright (c) 2014 The Bogcoin Core developers
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,8 +8,8 @@
 # Does the following:
 #   a) creates 3 nodes, with an empty chain (no blocks).
 #   b) node0 mines a block
-#   c) node1 mines 32 blocks, so now node 0 has 500000BITG, node 1 has 4250BITG, node2 has none.
-#   d) node0 sends 601 BITG to node2, in two transactions (301 BITG, then 300 BITG).
+#   c) node1 mines 32 blocks, so now node 0 has 500000BOG, node 1 has 4250BOG, node2 has none.
+#   d) node0 sends 601 BOG to node2, in two transactions (301 BOG, then 300 BOG).
 #   e) node0 mines a block, collects the fee on the second transaction
 #   f) node1 mines 16 blocks, to mature node0's just-mined block
 #   g) check that node0 has 100-21, node2 has 21
@@ -18,11 +18,11 @@
 #   j) check balances - node0 should have 0, node2 should have 100
 #
 
-from test_framework import BitcoinTestFramework
+from test_framework import BogcoinTestFramework
 from util import *
 
 
-class WalletTest (BitcoinTestFramework):
+class WalletTest (BogcoinTestFramework):
 
     def setup_chain(self):
         print("Initializing test directory "+self.options.tmpdir)
@@ -49,7 +49,7 @@ class WalletTest (BitcoinTestFramework):
         assert_equal(self.nodes[1].getbalance(), 4250)
         assert_equal(self.nodes[2].getbalance(), 0)
 
-        # Send 601 BTC from 0 to 2 using sendtoaddress call.
+        # Send 601 BOG from 0 to 2 using sendtoaddress call.
         # Second transaction will be child of first, and will require a fee
         self.nodes[0].sendtoaddress(self.nodes[2].getnewaddress(), 351)
         self.nodes[0].sendtoaddress(self.nodes[2].getnewaddress(), 350)
@@ -62,7 +62,7 @@ class WalletTest (BitcoinTestFramework):
         self.nodes[1].setgenerate(True, 16)
         self.sync_all()
 
-        # node0 should end up with 100 btc in block rewards plus fees, but
+        # node0 should end up with 100 bog in block rewards plus fees, but
         # minus the 21 plus fees sent to node2
         assert_greater_than(self.nodes[0].getbalance(), 59549)
         assert_equal(self.nodes[2].getbalance(), 701)

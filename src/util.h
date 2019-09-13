@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bogcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
@@ -9,11 +9,11 @@
  * Server/client environment: argument handling, config file parsing,
  * logging, thread wrappers
  */
-#ifndef BITCOIN_UTIL_H
-#define BITCOIN_UTIL_H
+#ifndef BOGCOIN_UTIL_H
+#define BOGCOIN_UTIL_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bitgreen-config.h"
+#include "config/bogcoin-config.h"
 #endif
 
 #include "compat.h"
@@ -29,7 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/thread/exceptions.hpp>
 
-//BitGreen only features
+//BogCoin only features
 
 extern bool fMasterNode;
 extern bool fLiteMode;
@@ -204,7 +204,7 @@ void RenameThread(const char* name);
 template <typename Callable>
 void TraceThread(const char* name, Callable func)
 {
-    std::string s = strprintf("bitgreen-%s", name);
+    std::string s = strprintf("bogcoin-%s", name);
     RenameThread(s.c_str());
     try {
         LogPrintf("%s thread start\n", name);
@@ -222,4 +222,4 @@ void TraceThread(const char* name, Callable func)
     }
 }
 
-#endif // BITCOIN_UTIL_H
+#endif // BOGCOIN_UTIL_H

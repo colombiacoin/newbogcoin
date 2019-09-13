@@ -1,5 +1,5 @@
 // Copyright (c) 2017 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -23,7 +23,7 @@
 #include "utilmoneystr.h"
 #include "guiutil.h"
 #include "qvalidatedlineedit.h"
-#include "bitcoinamountfield.h"
+#include "bogcoinamountfield.h"
 
 #include <QVariant>
 #include <QHBoxLayout>
@@ -265,7 +265,7 @@ bool MultisigDialog::addMultisig(int m, vector<string> keys){
 
         ui->addMultisigStatus->setStyleSheet("QLabel { color: black; }");
         ui->addMultisigStatus->setText("Multisignature address " +
-                                       QString::fromStdString(CBitcoinAddress(innerID).ToString()) +
+                                       QString::fromStdString(CBogcoinAddress(innerID).ToString()) +
                                        " has been added to the wallet.\nSend the redeem below for other owners to import:\n" +
                                        QString::fromStdString(redeem.ToString()));
     }catch(const runtime_error& e) {
@@ -321,8 +321,8 @@ void MultisigDialog::on_createButton_clicked()
         for(int i = 0; i < ui->destinationsList->count(); i++){
             QWidget* dest = qobject_cast<QWidget*>(ui->destinationsList->itemAt(i)->widget());
             QValidatedLineEdit* addr = dest->findChild<QValidatedLineEdit*>("destinationAddress");
-            BitcoinAmountField* amt = dest->findChild<BitcoinAmountField*>("destinationAmount");
-            CBitcoinAddress address;
+            BogcoinAmountField* amt = dest->findChild<BogcoinAmountField*>("destinationAmount");
+            CBogcoinAddress address;
 
             bool validDest = true;
 
@@ -330,7 +330,7 @@ void MultisigDialog::on_createButton_clicked()
                 addr->setValid(false);
                 validDest = false;
             }else{
-                address = CBitcoinAddress(addr->text().toStdString());
+                address = CBogcoinAddress(addr->text().toStdString());
             }
 
             if(!amt->validate()){
@@ -418,7 +418,7 @@ bool MultisigDialog::createMultisigTransaction(vector<CTxIn> vUserIn, vector<CTx
         }
 
         if(totalIn < totalOut){
-            throw runtime_error("Not enough BITG provided as input to complete transaction (including fee).");
+            throw runtime_error("Not enough BOG provided as input to complete transaction (including fee).");
         }
 
         //calculate change amount
@@ -483,7 +483,7 @@ bool MultisigDialog::createMultisigTransaction(vector<CTxIn> vUserIn, vector<CTx
             tx.vout.at(changeIndex).nValue -= fee;
             feeStringRet = strprintf("%d",((double)fee)/COIN).c_str();
         }else{
-            throw runtime_error("Not enough BITG provided to cover fee");
+            throw runtime_error("Not enough BOG provided to cover fee");
         }
 
         //clear junk from script sigs
@@ -606,7 +606,7 @@ bool MultisigDialog::signMultisigTx(CMutableTransaction& tx, string& errorOut, Q
             for(int i = 0; i < keyList->count(); i++){
                 QWidget* keyFrame = qobject_cast<QWidget*>(keyList->itemAt(i)->widget());
                 QLineEdit* key = keyFrame->findChild<QLineEdit*>("key");
-                CBitcoinSecret vchSecret;
+                CBogcoinSecret vchSecret;
                 if (!vchSecret.SetString(key->text().toStdString()))
                     throw runtime_error("Invalid private key");
                 CKey cKey = vchSecret.GetKey();
@@ -782,8 +782,8 @@ bool MultisigDialog::createRedeemScript(int m, vector<string> vKeys, CScript& re
         for(vector<string>::iterator it = vKeys.begin(); it != vKeys.end(); ++it) {
             string keyString = *it;
 #ifdef ENABLE_WALLET
-            // Case 1: BITG address and we have full public key:
-            CBitcoinAddress address(keyString);
+            // Case 1: BOG address and we have full public key:
+            CBogcoinAddress address(keyString);
             if (pwalletMain && address.IsValid()) {
                 CKeyID keyID;
                 if (!address.GetKeyID(keyID)) {
@@ -1004,7 +1004,7 @@ void MultisigDialog::on_addDestinationButton_clicked()
 
     destinationLayout->addWidget(destinationAmountLabel);
 
-    BitcoinAmountField* destinationAmount = new BitcoinAmountField(destinationFrame);
+    BogcoinAmountField* destinationAmount = new BogcoinAmountField(destinationFrame);
     destinationAmount->setObjectName(QStringLiteral("destinationAmount"));
 
     destinationAddressLabel->setText(QApplication::translate("MultisigDialog", strprintf("%i. Address: ", ui->destinationsList->count()+1).c_str(), 0));

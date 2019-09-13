@@ -1,6 +1,6 @@
-// Copyright (c) 2011-2015 The Bitcoin developers
+// Copyright (c) 2011-2015 The Bogcoin developers
 // Copyright (c) 2016-2018 The PIVX developers
-// Copyright (c) 2017-2019 The BitGreen Core developers
+// Copyright (c) 2017-2019 The BogCoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +8,7 @@
 
 #include "addressbookpage.h"
 #include "bip38tooldialog.h"
-#include "bitcoingui.h"
+#include "bogcoingui.h"
 #include "blockexplorer.h"
 #include "clientmodel.h"
 #include "guiutil.h"
@@ -160,7 +160,7 @@ WalletView::~WalletView()
 {
 }
 
-void WalletView::setBitcoinGUI(BitcoinGUI* gui)
+void WalletView::setBogcoinGUI(BogcoinGUI* gui)
 {
     if (gui) {
         // Clicking on a transaction on the overview page simply sends you to transaction history page

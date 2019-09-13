@@ -1,8 +1,8 @@
 // Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bogcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2015-2017 The PIVX developers
-// Copyright (c) 2019 The BitGreen Core developers
+// Copyright (c) 2019 The BogCoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -265,11 +265,11 @@ UniValue stop(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw runtime_error(
             "stop\n"
-            "\nStop BitGreen server.");
+            "\nStop BogCoin server.");
     // Event loop will exit after current HTTP requests have been handled, so
     // this reply will get back to the client.
     StartShutdown();
-    return "BitGreen server stopping";
+    return "BogCoin server stopping";
 }
 
 
@@ -351,40 +351,40 @@ static const CRPCCommand vRPCCommands[] =
         {"hidden", "reconsiderblock", &reconsiderblock, true, true, false},
         {"hidden", "setmocktime", &setmocktime, true, false, false},
 
-        /* BitGreen features */
-        {"bitgreen", "masternode", &masternode, true, true, false},
-        {"bitgreen", "listmasternodes", &listmasternodes, true, true, false},
-        {"bitgreen", "getmasternodecount", &getmasternodecount, true, true, false},
-        {"bitgreen", "masternodeconnect", &masternodeconnect, true, true, false},
-        {"bitgreen", "masternodecurrent", &masternodecurrent, true, true, false},
-        {"bitgreen", "masternodedebug", &masternodedebug, true, true, false},
-        {"bitgreen", "startmasternode", &startmasternode, true, true, false},
-        {"bitgreen", "createmasternodekey", &createmasternodekey, true, true, false},
-        {"bitgreen", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
-        {"bitgreen", "listmasternodeconf", &listmasternodeconf, true, true, false},
-        {"bitgreen", "getmasternodestatus", &getmasternodestatus, true, true, false},
-        {"bitgreen", "getmasternodewinners", &getmasternodewinners, true, true, false},
-        {"bitgreen", "getmasternodescores", &getmasternodescores, true, true, false},
-        {"bitgreen", "masternodebroadcast", &masternodebroadcast, true, true, false},
-        {"bitgreen", "mnbudget", &mnbudget, true, true, false},
-        {"bitgreen", "preparebudget", &preparebudget, true, true, false},
-        {"bitgreen", "submitbudget", &submitbudget, true, true, false},
-        {"bitgreen", "mnbudgetvote", &mnbudgetvote, true, true, false},
-        {"bitgreen", "getbudgetvotes", &getbudgetvotes, true, true, false},
-        {"bitgreen", "getnextsuperblock", &getnextsuperblock, true, true, false},
-        {"bitgreen", "getbudgetprojection", &getbudgetprojection, true, true, false},
-        {"bitgreen", "getbudgetinfo", &getbudgetinfo, true, true, false},
-        {"bitgreen", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
-        {"bitgreen", "mnfinalbudget", &mnfinalbudget, true, true, false},
-        {"bitgreen", "checkbudgets", &checkbudgets, true, true, false},
-        {"bitgreen", "mnsync", &mnsync, true, true, false},
-        {"bitgreen", "spork", &spork, true, true, false},
-        {"bitgreen", "preparecommunityproposal", &preparecommunityproposal, true, true, false},
-        {"bitgreen", "submitcommunityproposal", &submitcommunityproposal, true, true, false},
-        {"bitgreen", "getcommunityinfo", &getcommunityinfo, true, true, false},
-        {"bitgreen", "checkcommunityproposals", &checkcommunityproposals, true, true, false},
-        {"bitgreen", "getcommunityproposalvotes", &getcommunityproposalvotes, true, true, false},
-        {"bitgreen", "mncommunityvote", &mncommunityvote, true, true, false},
+        /* BogCoin features */
+        {"bogcoin", "masternode", &masternode, true, true, false},
+        {"bogcoin", "listmasternodes", &listmasternodes, true, true, false},
+        {"bogcoin", "getmasternodecount", &getmasternodecount, true, true, false},
+        {"bogcoin", "masternodeconnect", &masternodeconnect, true, true, false},
+        {"bogcoin", "masternodecurrent", &masternodecurrent, true, true, false},
+        {"bogcoin", "masternodedebug", &masternodedebug, true, true, false},
+        {"bogcoin", "startmasternode", &startmasternode, true, true, false},
+        {"bogcoin", "createmasternodekey", &createmasternodekey, true, true, false},
+        {"bogcoin", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
+        {"bogcoin", "listmasternodeconf", &listmasternodeconf, true, true, false},
+        {"bogcoin", "getmasternodestatus", &getmasternodestatus, true, true, false},
+        {"bogcoin", "getmasternodewinners", &getmasternodewinners, true, true, false},
+        {"bogcoin", "getmasternodescores", &getmasternodescores, true, true, false},
+        {"bogcoin", "masternodebroadcast", &masternodebroadcast, true, true, false},
+        {"bogcoin", "mnbudget", &mnbudget, true, true, false},
+        {"bogcoin", "preparebudget", &preparebudget, true, true, false},
+        {"bogcoin", "submitbudget", &submitbudget, true, true, false},
+        {"bogcoin", "mnbudgetvote", &mnbudgetvote, true, true, false},
+        {"bogcoin", "getbudgetvotes", &getbudgetvotes, true, true, false},
+        {"bogcoin", "getnextsuperblock", &getnextsuperblock, true, true, false},
+        {"bogcoin", "getbudgetprojection", &getbudgetprojection, true, true, false},
+        {"bogcoin", "getbudgetinfo", &getbudgetinfo, true, true, false},
+        {"bogcoin", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
+        {"bogcoin", "mnfinalbudget", &mnfinalbudget, true, true, false},
+        {"bogcoin", "checkbudgets", &checkbudgets, true, true, false},
+        {"bogcoin", "mnsync", &mnsync, true, true, false},
+        {"bogcoin", "spork", &spork, true, true, false},
+        {"bogcoin", "preparecommunityproposal", &preparecommunityproposal, true, true, false},
+        {"bogcoin", "submitcommunityproposal", &submitcommunityproposal, true, true, false},
+        {"bogcoin", "getcommunityinfo", &getcommunityinfo, true, true, false},
+        {"bogcoin", "checkcommunityproposals", &checkcommunityproposals, true, true, false},
+        {"bogcoin", "getcommunityproposalvotes", &getcommunityproposalvotes, true, true, false},
+        {"bogcoin", "mncommunityvote", &mncommunityvote, true, true, false},
 
 #ifdef ENABLE_WALLET
         /* Wallet */
@@ -597,7 +597,7 @@ std::vector<std::string> CRPCTable::listCommands() const
 
 std::string HelpExampleCli(string methodname, string args)
 {
-    return "> bitgreen-cli " + methodname + " " + args + "\n";
+    return "> bogcoin-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleRpc(string methodname, string args)

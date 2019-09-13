@@ -2,7 +2,7 @@ Wallet Tools
 ---------------------
 
 ### [BitRPC](/contrib/bitrpc) ###
-Allows for sending of all standard Bitcoin commands via RPC rather than as command line args.
+Allows for sending of all standard Bogcoin commands via RPC rather than as command line args.
 
 ### [SpendFrom](/contrib/spendfrom) ###
 
@@ -21,7 +21,7 @@ Construct a linear, no-fork, best version of the blockchain.
 
 ### [Qos](/contrib/qos) ###
 
-A Linux bash script that will set up traffic control (tc) to limit the outgoing bandwidth for connections to the Bitcoin network. This means one can have an always-on bitgreend instance running, and another local bitgreend/bitgreen-qt instance which connects to this node and receives blocks from it.
+A Linux bash script that will set up traffic control (tc) to limit the outgoing bandwidth for connections to the Bogcoin network. This means one can have an always-on bogcoind instance running, and another local bogcoind/bogcoin-qt instance which connects to this node and receives blocks from it.
 
 ### [Seeds](/contrib/seeds) ###
 Utility to generate the pnSeed[] array that is compiled into the client.
@@ -30,14 +30,14 @@ Build Tools and Keys
 ---------------------
 
 ### [Debian](/contrib/debian) ###
-Contains files used to package bitgreend/bitgreen-qt
-for Debian-based Linux systems. If you compile bitgreend/bitgreen-qt yourself, there are some useful files here.
+Contains files used to package bogcoind/bogcoin-qt
+for Debian-based Linux systems. If you compile bogcoind/bogcoin-qt yourself, there are some useful files here.
 
 ### [Gitian-descriptors](/contrib/gitian-descriptors) ###
 Notes on getting Gitian builds up and running using KVM.
 
 ### [Gitian-keys](/contrib/gitian-keys)
-PGP keys used for signing BitGreen Core [Gitian release](/doc/release-process.md) results.
+PGP keys used for signing BogCoin Core [Gitian release](/doc/release-process.md) results.
 
 ### [MacDeploy](/contrib/macdeploy) ###
 Scripts and notes for Mac builds.
@@ -49,7 +49,7 @@ Test and Verify Tools
 ---------------------
 
 ### [TestGen](/contrib/testgen) ###
-Utilities to generate test vectors for the data-driven BitGreen tests.
+Utilities to generate test vectors for the data-driven BogCoin tests.
 
 ### [Test Patches](/contrib/test-patches) ###
 These patches are applied when the automated pull-tester

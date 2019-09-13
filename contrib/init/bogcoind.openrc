@@ -1,0 +1,86 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout
+#
+if [ -d "/var/lib/bogcoin/.bogcoin" ]; then
+	BOGCOIND_DEFAULT_DATADIR="/var/lib/bogcoin/.bogcoin"
+else
+	BOGCOIND_DEFAULT_DATADIR="/var/lib/bogcoind"
+fi
+
+BOGCOIND_CONFIGFILE=${BOGCOIND_CONFIGFILE:-/etc/bogcoin/bogcoin.conf}
+BOGCOIND_PIDDIR=${BOGCOIND_PIDDIR:-/var/run/bogcoind}
+BOGCOIND_PIDFILE=${BOGCOIND_PIDFILE:-${BOGCOIND_PIDDIR}/bogcoind.pid}
+BOGCOIND_DATADIR=${BOGCOIND_DATADIR:-${BOGCOIND_DEFAULT_DATADIR}}
+BOGCOIND_USER=${BOGCOIND_USER:-bogcoin}
+BOGCOIND_GROUP=${BOGCOIND_GROUP:-bogcoin}
+BOGCOIND_BIN=${BOGCOIND_BIN:-/usr/bin/bogcoind}
+
+name="BogCoin Core Daemon"
+description="BogCoin crypto-currency p2p network daemon"
+
+command="/usr/bin/bogcoind"
+command_args="-pid=\"${BOGCOIND_PIDFILE}\" \
+		-conf=\"${BOGCOIND_CONFIGFILE}\" \
+		-datadir=\"${BOGCOIND_DATADIR}\" \
+		-daemon \
+		${BOGCOIND_OPTS}"
+
+required_files="${BOGCOIND_CONFIGFILE}"
+start_stop_daemon_args="-u ${BOGCOIND_USER} \
+			-N ${BOGCOIND_NICE:-0} -w 2000"
+pidfile="${BOGCOIND_PIDFILE}"
+retry=60
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${BOGCOIND_USER}:${BOGCOIND_GROUP}" \
+	"${BOGCOIND_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${BOGCOIND_USER}:${BOGCOIND_GROUP}" \
+	"${BOGCOIND_PIDDIR}"
+
+	checkpath -f \
+	-o ${BOGCOIND_USER}:${BOGCOIND_GROUP} \
+	-m 0660 \
+	${BOGCOIND_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${BOGCOIND_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run bogcoind."
+		eerror "The setting must appear in ${BOGCOIND_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following"
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is also recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"BogCoin Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

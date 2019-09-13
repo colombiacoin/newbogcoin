@@ -1,13 +1,13 @@
 dist_man1_MANS=
 
-if BUILD_BITCOIND
-  dist_man1_MANS+=bitgreend.1
+if BUILD_BOGCOIND
+  dist_man1_MANS+=bogcoind.1
 endif
 
 if ENABLE_QT
-  dist_man1_MANS+=bitgreen-qt.1
+  dist_man1_MANS+=bogcoin-qt.1
 endif
 
-if BUILD_BITCOIN_UTILS
-  dist_man1_MANS+=bitgreen-cli.1 bitgreen-tx.1
+if BUILD_BOGCOIN_UTILS
+  dist_man1_MANS+=bogcoin-cli.1 bogcoin-tx.1
 endif
